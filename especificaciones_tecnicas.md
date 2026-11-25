@@ -36,6 +36,10 @@ El objetivo es diseñar y construir una **Single Page Application (SPA)** de exp
 * **Línea Base de Producción (`package.json` → `browserslist.production`):** Definida explícitamente en la raíz del repositorio (`>0.2%`, `not dead`, `not op_mini all`, `iOS >= 14`, `Safari >= 14`) para garantizar compatibilidad moderna en el tráfico móvil prioritario (Safari iOS y Chrome Android vía WhatsApp) y acotar la resolución de herramientas como `@vitejs/plugin-react` / Babel y Autoprefixer dentro del proyecto.
 * **Línea Base de Desarrollo (`browserslist.development`):** Última versión de Chrome, Firefox y Safari (`last 1 chrome/firefox/safari version`) para agilizar la transformación en desarrollo local.
 
+#### 2.2. Infraestructura y Despliegue Continuo (GitHub Pages y Firebase Hosting)
+* **Ruta Base Dinámica (`vite.config.ts`):** Configurada mediante `base: process.env.VITE_BASE_PATH || '/'`, manteniendo intacta la compatibilidad en raíz (`/`) para desarrollo local y despliegues en **Firebase Hosting**, al tiempo que habilita despliegues en subcarpeta sin romper referencias a assets estáticos.
+* **Despliegue Continuo en GitHub Pages (`.github/workflows/deploy-pages.yml`):** Workflow de GitHub Actions activado automáticamente en cada `push` a `main` (y manualmente vía `workflow_dispatch`). Ejecuta `npm ci`, `npx tsc --noEmit` y `npm run build` con `VITE_BASE_PATH=/invitacion/`, publicando el artefacto generado desde `./dist` mediante `actions/upload-pages-artifact@v3` y `actions/deploy-pages@v4` sin versionar `dist/` en la rama `main` (permanece en `.gitignore`).
+
 ---
 
 ### 3. Sistema de Diseño (Design Tokens & UI Foundation)
