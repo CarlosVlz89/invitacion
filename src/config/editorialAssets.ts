@@ -1,4 +1,6 @@
 export type EditorialAssetKey =
+  | 'cottonPaperTile'
+  | 'botanicalEmbossBranch'
   | 'envelopeTexture'
   | 'envelopeLiningOlive'
   | 'waxSealBurgundy'
@@ -65,6 +67,32 @@ function resolveBundledAsset(baseName: string): string | null {
 }
 
 export const EDITORIAL_ASSETS: Readonly<Record<EditorialAssetKey, EditorialAssetSpec>> = {
+  cottonPaperTile: {
+    key: 'cottonPaperTile',
+    path: 'src/assets/images/cotton-paper-tile.webp',
+    resolvedSrc: resolveBundledAsset('cotton-paper-tile'),
+    alt: '',
+    isDecorative: true,
+    aspectRatio: '1 / 1',
+    recommendedDimensions: { width: 512, height: 512 },
+    targetMaxSizeKb: 45,
+    hasFallback: true,
+    loadingPriority: 'lazy',
+    phase: 1,
+  },
+  botanicalEmbossBranch: {
+    key: 'botanicalEmbossBranch',
+    path: 'src/assets/images/botanical-emboss-branch.webp',
+    resolvedSrc: resolveBundledAsset('botanical-emboss-branch'),
+    alt: '',
+    isDecorative: true,
+    aspectRatio: '2 / 3',
+    recommendedDimensions: { width: 480, height: 720 },
+    targetMaxSizeKb: 45,
+    hasFallback: true,
+    loadingPriority: 'lazy',
+    phase: 1,
+  },
   envelopeTexture: {
     key: 'envelopeTexture',
     path: 'src/assets/images/envelope-texture.webp',

@@ -316,9 +316,11 @@ export const WaxSealEntrance: React.FC = () => {
               />
             )}
 
-            {/* Monograma M & G grabado en bajorrelieve sobre el centro liso del sello */}
-            <span className="pointer-events-none absolute inset-0 flex items-center justify-center font-display font-medium text-base sm:text-lg tracking-[0.12em] whitespace-nowrap text-cream/90 drop-shadow-[0_1px_1.5px_rgba(28,4,8,0.75)]">
-              M &amp; G
+            {/* Monograma M & G estampado en Foil Oro Viejo sobre el centro del sello borgoña */}
+            <span className="pointer-events-none absolute inset-0 flex items-center justify-center">
+              <span className="font-display font-medium text-base sm:text-lg tracking-[0.12em] whitespace-nowrap editorial-foil-gold">
+                M &amp; G
+              </span>
             </span>
           </motion.button>
         </div>

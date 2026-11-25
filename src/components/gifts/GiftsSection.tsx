@@ -53,13 +53,13 @@ export const GiftsSection: React.FC = () => {
         }}
         className="flex flex-col items-center text-center"
       >
-        <p className="text-xs uppercase tracking-[0.24em] text-mocha font-sans font-medium">
+        <p className="text-xs uppercase tracking-[0.24em] text-mocha editorial-letterpress font-sans font-medium">
           Detalle de Bodas
         </p>
-        <h2 className="mt-3 font-script text-5xl md:text-6xl text-espresso font-normal leading-tight">
+        <h2 className="mt-3 font-script text-5xl md:text-6xl text-espresso editorial-engraving font-normal leading-tight">
           Mesa de Regalos
         </h2>
-        <div aria-hidden="true" className="mt-5 w-px h-10 bg-divider mx-auto" />
+        <div aria-hidden="true" className="mt-5 w-px h-10 editorial-debossed-rule-y mx-auto" />
 
         <p className="mt-6 max-w-xl font-sans text-xs sm:text-sm text-mocha tracking-wide leading-relaxed">
           {gifts.introNote}
@@ -73,7 +73,7 @@ export const GiftsSection: React.FC = () => {
               className="py-6 sm:py-7 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3"
             >
               <div className="space-y-1">
-                <h3 className="font-display text-2xl sm:text-[1.75rem] text-espresso font-normal leading-snug">
+                <h3 className="font-display text-2xl sm:text-[1.75rem] text-espresso editorial-letterpress font-normal leading-snug">
                   {registry.storeName}
                 </h3>
                 <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
@@ -107,7 +107,7 @@ export const GiftsSection: React.FC = () => {
 
         {/* Bloque Centrado Elegante: Lluvia de Sobres / Transferencia Bancaria */}
         <div className="mt-12 flex flex-col items-center max-w-md">
-          <p className="text-[11px] uppercase tracking-[0.28em] text-olive font-sans font-medium">
+          <p className="text-[11px] uppercase tracking-[0.28em] text-olive editorial-letterpress font-sans font-medium">
             Lluvia de Sobres
           </p>
           <p className="mt-2.5 font-sans text-xs sm:text-sm text-mocha tracking-wide leading-relaxed">

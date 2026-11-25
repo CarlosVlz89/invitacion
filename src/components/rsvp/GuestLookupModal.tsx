@@ -115,11 +115,11 @@ export const GuestLookupModal: React.FC<GuestLookupModalProps> = ({
         </form>
 
         <div aria-hidden="true" className="flex items-center gap-4 px-6">
-          <span className="h-px flex-1 bg-divider" />
+          <span className="h-px flex-1 editorial-debossed-rule-x" />
           <span className="text-[11px] uppercase tracking-[0.26em] text-mocha font-sans">
             o
           </span>
-          <span className="h-px flex-1 bg-divider" />
+          <span className="h-px flex-1 editorial-debossed-rule-x" />
         </div>
 
         <div className="space-y-4">

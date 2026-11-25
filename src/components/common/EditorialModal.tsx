@@ -107,7 +107,7 @@ export const EditorialModal: React.FC<EditorialModalProps> = ({
       aria-labelledby={titleId}
       className="editorial-dialog w-[calc(100%-2rem)] max-w-md rounded-sm border border-divider bg-card text-espresso p-0 editorial-letterpress-shadow overflow-x-hidden overflow-y-auto backdrop:bg-burgundy-hover/55"
     >
-      <div className="relative px-7 py-10 sm:px-10 sm:py-12 editorial-paper-grain overflow-hidden">
+      <div className="relative px-7 py-10 sm:px-10 sm:py-12 editorial-cotton-paper overflow-hidden isolate">
         {/* Textura botánica perimetral coherente con la tarjeta letterpress de RSVP */}
         {frameSrc && (
           <>
@@ -120,11 +120,11 @@ export const EditorialModal: React.FC<EditorialModalProps> = ({
               loading="lazy"
               decoding="async"
               onError={() => setFrameFailed(true)}
-              className="pointer-events-none select-none absolute inset-0 w-full h-full object-cover object-center opacity-75"
+              className="pointer-events-none select-none absolute inset-0 w-full h-full object-cover object-center opacity-80 mix-blend-multiply"
             />
             <div
               aria-hidden="true"
-              className="pointer-events-none absolute inset-0 bg-card/30"
+              className="pointer-events-none absolute inset-0 bg-card/15"
             />
           </>
         )}
@@ -154,17 +154,17 @@ export const EditorialModal: React.FC<EditorialModalProps> = ({
         <div className="relative z-10">
           <div className="flex flex-col items-center text-center pt-1 pb-6">
             {eyebrow && (
-              <p className="text-[11px] uppercase tracking-[0.24em] text-mocha font-sans font-medium">
+              <p className="text-[11px] uppercase tracking-[0.24em] text-mocha editorial-letterpress font-sans font-medium">
                 {eyebrow}
               </p>
             )}
             <h1
               id={titleId}
-              className="mt-2 font-script text-4xl sm:text-5xl leading-tight text-espresso font-normal px-4"
+              className="mt-2 font-script text-4xl sm:text-5xl leading-tight text-espresso editorial-engraving font-normal px-4"
             >
               {title}
             </h1>
-            <div aria-hidden="true" className="mt-3.5 w-px h-7 bg-divider mx-auto" />
+            <div aria-hidden="true" className="mt-3.5 w-px h-7 editorial-debossed-rule-y mx-auto" />
           </div>
 
           <div>{children}</div>

@@ -36,7 +36,15 @@ La identidad visual adopta una paleta cálida, orgánica y editorial donde **War
 
 **Protocolo de Nombres y Monograma:** En todos los títulos, copy visible, metadatos y `aria-label` se utiliza estrictamente el orden **Montse & Gerardo** (**Montse y Gerardo** en frases corridas) y el monograma **`M & G`** (`MonogramMG`).
 
-**Texturas Táctiles y Fotografía Editorial Raster Activas:** Los 9 assets `.webp` optimizados (`0 B` EXIF, bajo `targetMaxSizeKb`, cero SVG clipart) residen en `src/assets/images/`: `envelope-texture.webp`, `envelope-lining-olive.webp`, `wax-seal-burgundy.webp`, `vellum-overlay.webp`, `hero-couple-bw.webp`, `countdown-relief-bg.webp`, `couple-cameo-photo.webp`, `editorial-divider-bw.webp` y `botanical-card-frame.webp`, mientras las 5 claves ilustrativas opcionales (`heroFrameOrnament`, `venueEngraving`, `itineraryCurtains`, `dressCodeSketch`, `logisticsStamp`) mantienen fallbacks editoriales limpios CSS/SVG.
+**Texturas Táctiles y Fotografía Editorial Raster Activas:** Los 11 assets `.webp` optimizados (`0 B` EXIF, bajo `targetMaxSizeKb`, cero SVG clipart) residen en `src/assets/images/`: `cotton-paper-tile.webp` (`512×512`, `38.53 KB`, papel algodón 600g repetible sin costuras), `botanical-emboss-branch.webp` (`480×720` RGBA, `41.83 KB`, ramas de olivo en *blind embossing*), `envelope-texture.webp`, `envelope-lining-olive.webp`, `wax-seal-burgundy.webp`, `vellum-overlay.webp`, `hero-couple-bw.webp`, `countdown-relief-bg.webp`, `couple-cameo-photo.webp`, `editorial-divider-bw.webp` y `botanical-card-frame.webp`, mientras las 5 claves ilustrativas opcionales (`heroFrameOrnament`, `venueEngraving`, `itineraryCurtains`, `dressCodeSketch`, `logisticsStamp`) mantienen fallbacks editoriales limpios CSS/SVG.
+
+**Sistema de Acabados Táctiles de Imprenta (`src/index.css`):** Todas las utilidades incluyen degradación limpia en `@media (forced-colors: active)` (desactivando texturas, sombras y gradientes de texto en favor de `CanvasText`):
+* **`.editorial-cotton-paper`:** Textura de papel algodón 600g repetible sin costuras (`cotton-paper-tile.webp`, `420px × 420px`) sobre `#F2ECE1` aplicada en `EditorialSurface` (`paper-ivory`, `letterpress-card`), panel tipográfico desktop de `HeroSection`, `EditorialModal` y píldoras flotantes (`EditorialNav`, `FloatingAudioPlayer`).
+* **`.editorial-letterpress`:** Bajorrelieve hundido para tipografía serif, subtítulos, nombres de recintos/hoteles y etiquetas sobre crema (`text-shadow` blanco inferior + sombra superior sutil).
+* **`.editorial-engraving`:** Grabado/termografía con micro-relieve elevado para títulos caligráficos `Pinyon Script` sobre crema.
+* **`.editorial-debossed-rule-x` / `.editorial-debossed-rule-y`:** Filetes divisores `1px` en `#CBBFA9` con brillo adyacente `1px` (`rgba(255, 255, 255, 0.78)`) simulando cuño seco horizontal y vertical (incluyendo los filetes del itinerario).
+* **`.editorial-foil-gold`:** Acabado metálico **Hot Stamping en Oro Viejo** (`#E6D2A2` fallback sólido + gradiente `135deg var(--in-oklab)` `#CFAF77` -> `#F5E7C6` -> `#B69358` -> `#EBD9B3` con `background-clip: text` protegido vía `@supports`) **reservado exclusivamente a superficies Deep Burgundy (`#4F141C`)** y al sello de cera (`WaxSealEntrance`, `CountdownBand`, `ScratchCameo` y monograma `MonogramMG` variante `foil-gold` en `<footer>`). Prohibido sobre papel crema.
+* **Blind Embossing Lateral (`BlindEmbossMargins`):** Ramas de olivo prensadas sin tinta (`botanical-emboss-branch.webp`) en los márgenes externos (`left-0` y `right-0 -scale-x-100`, `w-20 sm:w-32 md:w-44`, `aria-hidden="true"`, `pointer-events-none`) de `VenueSection`, `ItinerarySection` y `DressCodeSection`.
 
 #### 3.2. Convención Editorial "Cero Chrome de Sitio Web" y Jerarquía Tipográfica
 * **Títulos de Sección y Nombres de los Novios:** Caligrafía clásica expresiva (`Pinyon Script`, `text-5xl md:text-6xl font-normal`) acompañada de filetes verticales finos (`w-px h-10 bg-divider`), eliminando badges ovalados estilo SaaS y encabezados genéricos de app.
@@ -136,9 +144,9 @@ La identidad visual adopta una paleta cálida, orgánica y editorial donde **War
 │   ├── assets/              # Tipografías locales, monograma SVG, audio y fotografías
 │   │   ├── audio/           # Pista ambiental provisional wedding-theme.mp3 (128 kbps, 44.1 kHz estéreo, 90s, 1.37 MiB, sin ID3)
 │   │   ├── fonts/           # Fuentes web optizadas (WOFF2)
-│   │   └── images/          # 9 assets .webp activos (envelope-texture, envelope-lining-olive, wax-seal-burgundy, vellum-overlay, hero-couple-bw, countdown-relief-bg, couple-cameo-photo, editorial-divider-bw, botanical-card-frame) + 5 fallbacks CSS/SVG
+│   │   └── images/          # 11 assets .webp activos (cotton-paper-tile, botanical-emboss-branch, envelope-texture, envelope-lining-olive, wax-seal-burgundy, vellum-overlay, hero-couple-bw, countdown-relief-bg, couple-cameo-photo, editorial-divider-bw, botanical-card-frame) + 5 fallbacks CSS/SVG
 │   ├── components/
-│   │   ├── editorial/       # EditorialSurface, WaxSealEntrance, HeroSection, CountdownBand, ScratchCameo, EditorialPhotoDivider, MonogramMG
+│   │   ├── editorial/       # EditorialSurface, BlindEmbossMargins, WaxSealEntrance, HeroSection, CountdownBand, ScratchCameo, EditorialPhotoDivider, MonogramMG
 │   │   ├── itinerary/       # ItinerarySection (cronograma dinámico segmentado Viernes/Sábado)
 │   │   ├── logistics/       # VenueSection y LodgingSection (ubicaciones, mapas y hospedaje QR / Convenios)
 │   │   ├── dresscode/       # DressCodeSection (guía de etiqueta formal y paleta sugerida)

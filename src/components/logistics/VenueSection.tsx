@@ -3,6 +3,7 @@ import { motion, useReducedMotion } from 'framer-motion';
 import { useGuest } from '../../context/GuestContext';
 import { EVENT_DETAILS, VenueDetail } from '../../config/eventDetails';
 import { getEditorialAsset } from '../../config/editorialAssets';
+import { BlindEmbossMargins } from '../editorial/BlindEmbossMargins';
 import { EditorialSurface } from '../editorial/EditorialSurface';
 
 const EDITORIAL_EASE: [number, number, number, number] = [0.22, 1, 0.36, 1];
@@ -24,15 +25,15 @@ const VenueEditorialBlock: React.FC<VenueEditorialBlockProps> = ({
     }`}
   >
     <div className="flex flex-col items-center">
-      <p className="text-[11px] uppercase tracking-[0.28em] text-olive font-sans font-medium">
+      <p className="text-[11px] uppercase tracking-[0.28em] text-olive editorial-letterpress font-sans font-medium">
         {venue.tag}
       </p>
 
-      <h3 className="mt-3 font-display text-2xl sm:text-[1.95rem] text-espresso font-normal leading-tight">
+      <h3 className="mt-3 font-display text-2xl sm:text-[1.95rem] text-espresso editorial-letterpress font-normal leading-tight">
         {venue.title}
       </h3>
 
-      <div aria-hidden="true" className="my-4 w-8 h-px bg-divider" />
+      <div aria-hidden="true" className="my-4 w-8 h-px editorial-debossed-rule-x" />
 
       <div className="space-y-1 text-xs sm:text-sm font-sans text-mocha tracking-wide">
         <p className="text-espresso font-medium">{venue.dateLabel}</p>
@@ -40,7 +41,7 @@ const VenueEditorialBlock: React.FC<VenueEditorialBlockProps> = ({
       </div>
 
       <div className="mt-5 space-y-1.5 max-w-sm">
-        <p className="font-display text-lg sm:text-xl text-espresso font-medium">
+        <p className="font-display text-lg sm:text-xl text-espresso editorial-letterpress font-medium">
           {venue.venueName}
         </p>
         <p className="font-sans text-xs sm:text-[13px] text-mocha tracking-wide leading-relaxed">
@@ -79,6 +80,7 @@ export const VenueSection: React.FC = () => {
     <EditorialSurface
       as="section"
       variant="paper-ivory"
+      sideDecoration={<BlindEmbossMargins />}
       id="ubicacion"
       className="w-full py-20 md:py-28 px-4 sm:px-6 scroll-mt-16"
       contentClassName="w-full max-w-3xl mx-auto"
@@ -93,13 +95,13 @@ export const VenueSection: React.FC = () => {
         }}
         className="flex flex-col items-center text-center"
       >
-        <p className="text-xs uppercase tracking-[0.24em] text-mocha font-sans font-medium">
+        <p className="text-xs uppercase tracking-[0.24em] text-mocha editorial-letterpress font-sans font-medium">
           Dónde y Cuándo
         </p>
-        <h2 className="mt-3 font-script text-5xl md:text-6xl text-espresso font-normal leading-tight">
+        <h2 className="mt-3 font-script text-5xl md:text-6xl text-espresso editorial-engraving font-normal leading-tight">
           Ubicaciones
         </h2>
-        <div aria-hidden="true" className="mt-5 w-px h-10 bg-divider mx-auto" />
+        <div aria-hidden="true" className="mt-5 w-px h-10 editorial-debossed-rule-y mx-auto" />
 
         {/* Grabado arquitectónico raster real: se omite limpiamente cuando el archivo no existe */}
         {engravingSrc && (

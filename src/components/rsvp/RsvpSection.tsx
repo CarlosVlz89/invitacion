@@ -297,13 +297,13 @@ export const RsvpSection: React.FC<RsvpSectionProps> = ({ onOpenLookup }) => {
         >
           {/* Encabezado de Sección RSVP */}
           <div className="flex flex-col items-center text-center mb-8">
-            <p className="text-xs uppercase tracking-[0.28em] text-burgundy font-sans font-medium">
+            <p className="text-xs uppercase tracking-[0.28em] text-burgundy editorial-letterpress font-sans font-medium">
               RSVP
             </p>
-            <h2 className="mt-2 font-script text-5xl md:text-6xl text-espresso font-normal leading-tight">
+            <h2 className="mt-2 font-script text-5xl md:text-6xl text-espresso editorial-engraving font-normal leading-tight">
               Confirmación de Asistencia
             </h2>
-            <div aria-hidden="true" className="mt-4 w-px h-8 bg-divider mx-auto" />
+            <div aria-hidden="true" className="mt-4 w-px h-8 editorial-debossed-rule-y mx-auto" />
           </div>
 
           {/* Rama 1: Invitado Genérico (URL sin ?guest=ID o ID no encontrado) */}
@@ -355,7 +355,7 @@ export const RsvpSection: React.FC<RsvpSectionProps> = ({ onOpenLookup }) => {
               )}
 
               <div className="space-y-1.5">
-                <p className="font-display text-2xl text-espresso font-medium">
+                <p className="font-display text-2xl text-espresso editorial-letterpress font-medium">
                   {guest.nombreInvitacion}
                 </p>
                 <p className="text-[11px] uppercase tracking-[0.22em] text-moka font-sans tabular-nums">
@@ -480,7 +480,7 @@ export const RsvpSection: React.FC<RsvpSectionProps> = ({ onOpenLookup }) => {
             >
               {/* Encabezado de Cupo Estricto en Papelería Editorial */}
               <div className="border-y border-divider py-4 text-center">
-                <p className="font-display text-xl sm:text-2xl text-espresso font-normal">
+                <p className="font-display text-xl sm:text-2xl text-espresso editorial-letterpress font-normal">
                   {guest.nombreInvitacion}
                 </p>
                 <p

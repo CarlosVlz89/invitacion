@@ -76,12 +76,12 @@ export const EditorialNav: React.FC = () => {
         aria-expanded={menuOpen}
         aria-controls="editorial-index-menu"
         aria-label={menuOpen ? 'Cerrar índice de secciones' : 'Abrir índice de secciones'}
-        className="inline-flex items-center gap-2.5 px-4 h-11 rounded-full bg-cream/90 backdrop-blur-md border border-divider/80 shadow-sm text-espresso hover:text-burgundy hover:border-burgundy/40 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-burgundy"
+        className="inline-flex items-center gap-2.5 px-4 h-11 rounded-full bg-cream/95 editorial-cotton-paper border border-divider/90 shadow-sm text-espresso hover:text-burgundy hover:border-burgundy/40 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-burgundy"
       >
-        <span className="font-display text-sm tracking-[0.16em] text-burgundy font-medium">
+        <span className="font-display text-sm tracking-[0.16em] text-burgundy editorial-letterpress font-medium">
           M &amp; G
         </span>
-        <span aria-hidden="true" className="w-px h-3.5 bg-divider" />
+        <span aria-hidden="true" className="w-px h-3.5 editorial-debossed-rule-y" />
         <span className="text-[10px] uppercase tracking-[0.22em] font-sans font-medium text-espresso">
           {menuOpen ? 'Cerrar' : 'Índice'}
         </span>
@@ -96,7 +96,7 @@ export const EditorialNav: React.FC = () => {
       {menuOpen && (
         <div
           id="editorial-index-menu"
-          className="mt-2.5 w-[min(calc(100dvw-2rem),16.5rem)] max-h-[calc(100dvh-6rem)] overflow-y-auto rounded-sm bg-cream/95 backdrop-blur-md border border-divider/90 shadow-lg px-5 py-3 text-espresso"
+          className="mt-2.5 w-[min(calc(100dvw-2rem),16.5rem)] max-h-[calc(100dvh-6rem)] overflow-y-auto rounded-sm bg-cream/95 editorial-cotton-paper border border-divider/90 shadow-lg px-5 py-3 text-espresso"
         >
           <ul className="flex flex-col divide-y divide-divider/70">
             <li>

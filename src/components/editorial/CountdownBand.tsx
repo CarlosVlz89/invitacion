@@ -62,18 +62,18 @@ export const CountdownBand: React.FC = () => {
           Faltan
         </h2>
 
-        {/* Números Serif Limpios en Cuadrícula Editorial */}
+        {/* Números Serif Limpios en Foil Oro Viejo sobre Deep Burgundy */}
         <div
           role="group"
           aria-label="Tiempo restante para la boda"
-          className="mt-8 sm:mt-10 w-full max-w-xl grid grid-cols-4 divide-x divide-cream/20 border-y border-cream/20 py-5 sm:py-6"
+          className="mt-8 sm:mt-10 w-full max-w-xl grid grid-cols-4 divide-x divide-[#E6D2A2]/25 border-y border-[#E6D2A2]/30 py-5 sm:py-6"
         >
           {units.map((unit) => (
             <div
               key={unit.label}
               className="flex flex-col items-center justify-center px-1.5 sm:px-4"
             >
-              <span className="font-display tabular-nums text-3xl sm:text-5xl md:text-[3.4rem] leading-none font-normal text-cream tracking-wide">
+              <span className="font-display tabular-nums text-3xl sm:text-5xl md:text-[3.4rem] leading-none font-normal tracking-wide editorial-foil-gold">
                 {String(unit.value).padStart(2, '0')}
               </span>
               <span className="mt-2.5 text-[9px] sm:text-[11px] uppercase tracking-[0.22em] sm:tracking-[0.28em] text-cream/85 font-sans font-light">
@@ -83,14 +83,14 @@ export const CountdownBand: React.FC = () => {
           ))}
         </div>
 
-        {/* Línea Divisoria Fina y Subtítulo Emotivo */}
+        {/* Línea Divisoria Fina con Ornamento en Oro Viejo y Subtítulo Emotivo */}
         <div
           aria-hidden="true"
-          className="my-7 sm:my-8 flex items-center gap-3 w-full max-w-[160px]"
+          className="my-7 sm:my-8 flex items-center gap-3 w-full max-w-[168px]"
         >
-          <span className="h-px flex-1 bg-cream/25" />
-          <span className="w-1.5 h-1.5 rotate-45 border border-cream/55" />
-          <span className="h-px flex-1 bg-cream/25" />
+          <span className="h-px flex-1 bg-gradient-to-r from-transparent via-[#E6D2A2]/55 to-[#E6D2A2]/75" />
+          <span className="w-1.5 h-1.5 rotate-45 border border-[#E6D2A2]/80 bg-[#E6D2A2]/20" />
+          <span className="h-px flex-1 bg-gradient-to-l from-transparent via-[#E6D2A2]/55 to-[#E6D2A2]/75" />
         </div>
 
         <p className="max-w-md font-sans text-xs sm:text-sm text-cream/90 tracking-wide leading-relaxed font-light">

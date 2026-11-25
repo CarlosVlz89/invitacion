@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
 import { EVENT_DETAILS } from '../../config/eventDetails';
 import { getEditorialAsset } from '../../config/editorialAssets';
+import { BlindEmbossMargins } from '../editorial/BlindEmbossMargins';
 import { EditorialSurface } from '../editorial/EditorialSurface';
 
 const EDITORIAL_EASE: [number, number, number, number] = [0.22, 1, 0.36, 1];
@@ -18,6 +19,7 @@ export const DressCodeSection: React.FC = () => {
     <EditorialSurface
       as="section"
       variant="paper-ivory"
+      sideDecoration={<BlindEmbossMargins />}
       id="vestimenta"
       className="w-full py-20 md:py-28 px-4 sm:px-6 scroll-mt-16"
       contentClassName="w-full max-w-3xl mx-auto"
@@ -32,14 +34,14 @@ export const DressCodeSection: React.FC = () => {
         }}
         className="flex flex-col items-center text-center"
       >
-        <p className="text-xs uppercase tracking-[0.24em] text-olive font-sans font-medium">
+        <p className="text-xs uppercase tracking-[0.24em] text-olive editorial-letterpress font-sans font-medium">
           {dressCode.badgeLabel}
         </p>
-        <h2 className="mt-3 font-script text-5xl md:text-6xl text-espresso font-normal leading-tight">
+        <h2 className="mt-3 font-script text-5xl md:text-6xl text-espresso editorial-engraving font-normal leading-tight">
           {dressCode.title}
         </h2>
-        <div aria-hidden="true" className="mt-5 w-px h-10 bg-divider mx-auto" />
-        <p className="mt-5 font-display text-lg sm:text-xl italic text-mocha">
+        <div aria-hidden="true" className="mt-5 w-px h-10 editorial-debossed-rule-y mx-auto" />
+        <p className="mt-5 font-display text-lg sm:text-xl italic text-mocha editorial-letterpress">
           {dressCode.subtitle}
         </p>
 
@@ -64,7 +66,7 @@ export const DressCodeSection: React.FC = () => {
         {/* Prosa Editorial Concisa y Centrada (sin cajas pesadas) */}
         <div className="mt-10 max-w-lg space-y-6">
           <div>
-            <h3 className="text-[11px] uppercase tracking-[0.26em] text-espresso font-sans font-medium">
+            <h3 className="text-[11px] uppercase tracking-[0.26em] text-espresso editorial-letterpress font-sans font-medium">
               Damas
             </h3>
             <p className="mt-2 font-sans text-xs sm:text-sm text-mocha tracking-wide leading-relaxed">
@@ -72,10 +74,10 @@ export const DressCodeSection: React.FC = () => {
             </p>
           </div>
 
-          <div aria-hidden="true" className="w-10 h-px bg-divider mx-auto" />
+          <div aria-hidden="true" className="w-10 h-px editorial-debossed-rule-x mx-auto" />
 
           <div>
-            <h3 className="text-[11px] uppercase tracking-[0.26em] text-espresso font-sans font-medium">
+            <h3 className="text-[11px] uppercase tracking-[0.26em] text-espresso editorial-letterpress font-sans font-medium">
               Caballeros
             </h3>
             <p className="mt-2 font-sans text-xs sm:text-sm text-mocha tracking-wide leading-relaxed">
@@ -86,7 +88,7 @@ export const DressCodeSection: React.FC = () => {
 
         {/* Tira Horizontal de Muestras de Tela / Color (evocando retazos de seda y lino) */}
         <div className="mt-12 w-full max-w-xl flex flex-col items-center">
-          <p className="text-[11px] uppercase tracking-[0.26em] text-mocha font-sans font-medium mb-6">
+          <p className="text-[11px] uppercase tracking-[0.26em] text-mocha editorial-letterpress font-sans font-medium mb-6">
             Paleta de Inspiración
           </p>
 

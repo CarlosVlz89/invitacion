@@ -291,14 +291,14 @@ export const ScratchCameo: React.FC = () => {
 
   return (
     <div className="flex flex-col items-center text-center">
-      {/* Marco Ovalado Cameo con proporción fija (CLS = 0) */}
-      <div className="relative p-2 rounded-[50%] border border-cream/25 bg-cream/[0.04] shadow-[0_20px_48px_-16px_rgba(0,0,0,0.55)]">
+      {/* Marco Ovalado Cameo con proporción fija (CLS = 0) y filete fino en Oro Viejo */}
+      <div className="relative p-2 rounded-[50%] border border-[#E6D2A2]/45 bg-cream/[0.04] shadow-[0_20px_48px_-16px_rgba(0,0,0,0.55)]">
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute -inset-2 rounded-[50%] border border-cream/10"
+          className="pointer-events-none absolute -inset-2 rounded-[50%] border border-[#E6D2A2]/20"
         />
 
-        <div className="relative w-[228px] sm:w-[252px] aspect-[3/4] rounded-[50%] overflow-hidden border border-cream/35 bg-burgundy-hover">
+        <div className="relative w-[228px] sm:w-[252px] aspect-[3/4] rounded-[50%] overflow-hidden border border-[#E6D2A2]/60 bg-burgundy-hover">
           {/* Capa Inferior: Fotografía Editorial B&N Cálido o Placeholder Editorial */}
           {cameoSrc ? (
             <img

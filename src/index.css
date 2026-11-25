@@ -87,7 +87,61 @@
 }
 
 @layer components {
-  /* Papel lino crema táctil (#F2ECE1) */
+  /* Papel algodón artesanal 600g continuo y repetible sin costuras (#F2ECE1) */
+  .editorial-cotton-paper {
+    background-color: var(--bg-primary);
+    background-image: url('./assets/images/cotton-paper-tile.webp');
+    background-repeat: repeat;
+    background-size: 420px 420px;
+  }
+
+  /* Letterpress (bajorrelieve hundido) en tipografía serif, subtítulos y etiquetas sobre crema */
+  .editorial-letterpress {
+    text-shadow:
+      0 1px 0 rgba(255, 255, 255, 0.78),
+      0 -0.5px 0 rgba(45, 35, 30, 0.16);
+  }
+
+  /* Grabado / Termografía (micro-relieve elevado) en caligrafía Pinyon Script sobre crema */
+  .editorial-engraving {
+    text-shadow:
+      0 1px 1px rgba(45, 35, 30, 0.16),
+      0 0.5px 0 rgba(255, 255, 255, 0.45);
+  }
+
+  /* Filetes divisores 1px marcados en cuño seco (horizontal y vertical) */
+  .editorial-debossed-rule-x {
+    background-color: #CBBFA9;
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.78);
+  }
+
+  .editorial-debossed-rule-y {
+    background-color: #CBBFA9;
+    box-shadow: 1px 0 0 rgba(255, 255, 255, 0.78);
+  }
+
+  /* Foil / Hot Stamping Oro Viejo — reservado exclusivamente a superficies Deep Burgundy (#4F141C) */
+  .editorial-foil-gold {
+    color: #E6D2A2;
+    filter: drop-shadow(0 1px 1px rgba(24, 5, 8, 0.45));
+  }
+
+  @supports ((-webkit-background-clip: text) or (background-clip: text)) {
+    .editorial-foil-gold {
+      background-image: linear-gradient(
+        135deg var(--in-oklab),
+        #CFAF77 0%,
+        #F5E7C6 38%,
+        #B69358 66%,
+        #EBD9B3 100%
+      );
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+  }
+
+  /* Papel lino crema táctil (#F2ECE1) — respaldo CSS sutil */
   .editorial-paper-grain {
     background-image:
       radial-gradient(rgba(45, 35, 30, 0.032) 0.75px, transparent 0.75px),
@@ -266,6 +320,30 @@
 
   /* Soporte de accesibilidad para Forced Colors Mode (High Contrast) */
   @media (forced-colors: active) {
+    .editorial-cotton-paper {
+      background-image: none;
+    }
+
+    .editorial-letterpress,
+    .editorial-engraving {
+      text-shadow: none;
+    }
+
+    .editorial-debossed-rule-x,
+    .editorial-debossed-rule-y {
+      background-color: CanvasText;
+      box-shadow: none;
+    }
+
+    .editorial-foil-gold {
+      background-image: none;
+      -webkit-background-clip: border-box;
+      background-clip: border-box;
+      -webkit-text-fill-color: CanvasText;
+      color: CanvasText;
+      filter: none;
+    }
+
     .editorial-envelope-body {
       border: 2px solid CanvasText;
     }

@@ -104,13 +104,13 @@ export const LodgingSection: React.FC = () => {
           </div>
         )}
 
-        <p className="text-xs uppercase tracking-[0.24em] text-mocha font-sans font-medium">
+        <p className="text-xs uppercase tracking-[0.24em] text-mocha editorial-letterpress font-sans font-medium">
           Logística y Estancia
         </p>
-        <h2 className="mt-3 font-script text-5xl md:text-6xl text-espresso font-normal leading-tight">
+        <h2 className="mt-3 font-script text-5xl md:text-6xl text-espresso editorial-engraving font-normal leading-tight">
           Hospedaje
         </h2>
-        <div aria-hidden="true" className="mt-5 w-px h-10 bg-divider mx-auto" />
+        <div aria-hidden="true" className="mt-5 w-px h-10 editorial-debossed-rule-y mx-auto" />
 
         {/* Aislamiento Estricto Tier A (Hotel Sede + QR) vs Tier B (Directorio Editorial de Convenios) */}
         {guest.tier === 'A' ? (
@@ -120,11 +120,11 @@ export const LodgingSection: React.FC = () => {
           >
             <div className="grid grid-cols-1 md:grid-cols-12 gap-9 items-center">
               <div className="md:col-span-7 text-center md:text-left">
-                <p className="text-[11px] uppercase tracking-[0.26em] text-olive font-sans font-medium">
+                <p className="text-[11px] uppercase tracking-[0.26em] text-olive editorial-letterpress font-sans font-medium">
                   {EVENT_DETAILS.lodging.tierAHostHotel.badgeLabel}
                 </p>
 
-                <h3 className="mt-3 font-display text-2xl sm:text-3xl text-espresso font-normal leading-tight">
+                <h3 className="mt-3 font-display text-2xl sm:text-3xl text-espresso editorial-letterpress font-normal leading-tight">
                   {EVENT_DETAILS.lodging.tierAHostHotel.name}
                 </h3>
 
@@ -204,11 +204,11 @@ export const LodgingSection: React.FC = () => {
                   className="py-7 sm:py-8 flex flex-col md:flex-row md:items-center md:justify-between gap-6 text-left"
                 >
                   <div className="space-y-1.5 md:max-w-md">
-                    <p className="text-[10px] uppercase tracking-[0.26em] text-olive font-sans font-medium">
+                    <p className="text-[10px] uppercase tracking-[0.26em] text-olive editorial-letterpress font-sans font-medium">
                       Convenio Preferencial
                     </p>
 
-                    <h3 className="font-display text-2xl sm:text-[1.75rem] text-espresso font-normal leading-snug">
+                    <h3 className="font-display text-2xl sm:text-[1.75rem] text-espresso editorial-letterpress font-normal leading-snug">
                       {hotel.name}
                     </h3>
 

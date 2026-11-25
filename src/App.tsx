@@ -86,7 +86,8 @@ const EditorialExperience: React.FC = () => {
           contentClassName="py-14 px-4 text-center flex flex-col items-center"
         >
           <MonogramMG
-            className="w-14 h-14 text-cream/95 mb-3"
+            className="w-16 h-16 mb-3"
+            variant="foil-gold"
             decorative
           />
           <p className="font-script text-4xl text-cream leading-none">

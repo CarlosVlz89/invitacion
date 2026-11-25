@@ -25,7 +25,7 @@ export const FloatingAudioPlayer: React.FC = () => {
         type="button"
         onClick={toggleAudio}
         aria-pressed={isPlaying}
-        className="group relative flex items-center gap-2 px-3.5 py-2.5 min-h-[44px] rounded-full bg-cream/95 border border-divider/90 shadow-md backdrop-blur-md text-espresso hover:text-burgundy hover:border-burgundy/40 transition-colors duration-300 hover:shadow-lg focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-burgundy"
+        className="group relative flex items-center gap-2 px-3.5 py-2.5 min-h-[44px] rounded-full bg-cream/95 editorial-cotton-paper border border-divider/90 shadow-md text-espresso hover:text-burgundy hover:border-burgundy/40 transition-colors duration-300 hover:shadow-lg focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-burgundy"
         aria-label={isPlaying ? 'Pausar música ambiental' : 'Reproducir música ambiental'}
       >
         <div aria-hidden="true" className="relative flex items-center justify-center w-5 h-5">

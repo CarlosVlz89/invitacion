@@ -69,7 +69,7 @@ export const HeroSection: React.FC = () => {
           duration: prefersReducedMotion ? 0 : 0.75,
           ease: EDITORIAL_EASE,
         }}
-        className="relative z-10 min-h-[100dvh] md:bg-cream md:editorial-paper-grain md:border-l md:border-divider flex flex-col items-center justify-between md:justify-center px-6 pt-16 pb-10 md:px-12 lg:px-16 md:py-20 text-center"
+        className="relative z-10 min-h-[100dvh] md:bg-cream md:editorial-cotton-paper md:border-l md:border-divider flex flex-col items-center justify-between md:justify-center px-6 pt-16 pb-10 md:px-12 lg:px-16 md:py-20 text-center"
       >
         {/* Encabezado Superior Discreto */}
         <div className="flex flex-col items-center md:mb-6">
@@ -80,12 +80,12 @@ export const HeroSection: React.FC = () => {
               label="Monograma de boda M y G"
             />
           </div>
-          <p className="text-[10px] sm:text-[11px] uppercase tracking-[0.34em] text-cream/95 md:text-mocha font-sans font-medium max-w-xs leading-relaxed">
+          <p className="text-[10px] sm:text-[11px] uppercase tracking-[0.34em] text-cream/95 md:text-mocha md:editorial-letterpress font-sans font-medium max-w-xs leading-relaxed">
             Con la bendición de nuestras familias
           </p>
           <span
             aria-hidden="true"
-            className="hidden md:block mt-6 w-px h-9 bg-divider"
+            className="hidden md:block mt-6 w-px h-9 editorial-debossed-rule-y"
           />
         </div>
 
@@ -93,7 +93,7 @@ export const HeroSection: React.FC = () => {
         <div className="w-full max-w-md flex flex-col items-center">
           <h1
             id="hero-couple-names"
-            className="font-script text-[3.5rem] leading-[1.04] sm:text-7xl lg:text-[5.25rem] text-cream md:text-espresso font-normal tracking-normal drop-shadow-[0_2px_10px_rgba(20,14,12,0.45)] md:drop-shadow-none"
+            className="font-script text-[3.5rem] leading-[1.04] sm:text-7xl lg:text-[5.25rem] text-cream md:text-espresso font-normal tracking-normal drop-shadow-[0_2px_10px_rgba(20,14,12,0.45)] md:drop-shadow-none md:editorial-engraving"
           >
             <span className="block sm:inline">Montse</span>
             <span
@@ -110,7 +110,7 @@ export const HeroSection: React.FC = () => {
           <div className="mt-6 md:mt-8 w-full max-w-sm border-y border-cream/35 md:border-divider py-3.5 px-2">
             <p
               data-testid="hero-tier-date"
-              className="font-display text-base sm:text-lg lg:text-xl text-cream md:text-espresso tracking-[0.06em] font-medium leading-snug"
+              className="font-display text-base sm:text-lg lg:text-xl text-cream md:text-espresso md:editorial-letterpress tracking-[0.06em] font-medium leading-snug"
             >
               {dateHeaderLabel}
             </p>

@@ -3,6 +3,7 @@ import { motion, useReducedMotion } from 'framer-motion';
 import { useGuest } from '../../context/GuestContext';
 import { EVENT_DETAILS, ItineraryMilestone } from '../../config/eventDetails';
 import { getEditorialAsset } from '../../config/editorialAssets';
+import { BlindEmbossMargins } from '../editorial/BlindEmbossMargins';
 import { EditorialSurface } from '../editorial/EditorialSurface';
 
 const EDITORIAL_EASE: [number, number, number, number] = [0.22, 1, 0.36, 1];
@@ -22,10 +23,10 @@ const TimelineBlock: React.FC<TimelineBlockProps> = ({
 }) => (
   <div data-testid={testId} className="w-full max-w-xl mx-auto">
     <div className="text-center mb-12">
-      <p className="text-xs uppercase tracking-[0.24em] text-olive font-sans font-medium">
+      <p className="text-xs uppercase tracking-[0.24em] text-olive editorial-letterpress font-sans font-medium">
         {dateLabel}
       </p>
-      <h3 className="mt-2 font-display text-2xl sm:text-3xl text-espresso font-normal tracking-wide">
+      <h3 className="mt-2 font-display text-2xl sm:text-3xl text-espresso editorial-letterpress font-normal tracking-wide">
         {heading}
       </h3>
     </div>
@@ -44,12 +45,12 @@ const TimelineBlock: React.FC<TimelineBlockProps> = ({
             </span>
           </div>
 
-          {/* Línea divisoria vertical 1px */}
-          <div aria-hidden="true" className="w-px bg-divider self-stretch" />
+          {/* Línea divisoria vertical 1px marcada en cuño seco */}
+          <div aria-hidden="true" className="w-px editorial-debossed-rule-y self-stretch" />
 
           {/* Momento en Pinyon Script y descripción limpia */}
           <div className="py-0.5 flex flex-col justify-center">
-            <h4 className="font-script text-3xl sm:text-[2.25rem] text-espresso font-normal leading-tight">
+            <h4 className="font-script text-3xl sm:text-[2.25rem] text-espresso editorial-engraving font-normal leading-tight">
               {item.title}
             </h4>
             <p className="mt-1.5 font-sans text-xs sm:text-sm text-mocha tracking-wide leading-relaxed">
@@ -79,6 +80,7 @@ export const ItinerarySection: React.FC = () => {
     <EditorialSurface
       as="section"
       variant="paper-ivory"
+      sideDecoration={<BlindEmbossMargins />}
       id="itinerario"
       className="w-full py-20 md:py-28 px-4 sm:px-6 scroll-mt-16"
       contentClassName="w-full max-w-3xl mx-auto"
@@ -107,13 +109,13 @@ export const ItinerarySection: React.FC = () => {
         }}
         className="flex flex-col items-center text-center"
       >
-        <p className="text-xs uppercase tracking-[0.24em] text-mocha font-sans font-medium">
+        <p className="text-xs uppercase tracking-[0.24em] text-mocha editorial-letterpress font-sans font-medium">
           Programa de Celebración
         </p>
-        <h2 className="mt-3 font-script text-5xl md:text-6xl text-espresso font-normal leading-tight">
+        <h2 className="mt-3 font-script text-5xl md:text-6xl text-espresso editorial-engraving font-normal leading-tight">
           Itinerario
         </h2>
-        <div aria-hidden="true" className="mt-5 w-px h-10 bg-divider mx-auto" />
+        <div aria-hidden="true" className="mt-5 w-px h-10 editorial-debossed-rule-y mx-auto" />
 
         <div className="mt-12 w-full">
           {/* Bloque exclusivo Tier A: Viernes 16 de Julio */}
@@ -129,7 +131,7 @@ export const ItinerarySection: React.FC = () => {
               {/* Separador editorial presente únicamente cuando existen ambos días (Tier A) */}
               <div
                 aria-hidden="true"
-                className="my-14 w-px h-12 bg-divider mx-auto"
+                className="my-14 w-px h-12 editorial-debossed-rule-y mx-auto"
               />
             </>
           )}

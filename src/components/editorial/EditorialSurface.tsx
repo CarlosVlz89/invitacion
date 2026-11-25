@@ -15,6 +15,7 @@ export interface EditorialSurfaceProps {
   as?: EditorialSurfaceElement;
   variant: EditorialSurfaceVariant;
   textureAssetKey?: EditorialAssetKey;
+  sideDecoration?: React.ReactNode;
   id?: string;
   className?: string;
   contentClassName?: string;
@@ -26,6 +27,7 @@ export const EditorialSurface: React.FC<EditorialSurfaceProps> = ({
   as = 'div',
   variant,
   textureAssetKey,
+  sideDecoration,
   id,
   className = '',
   contentClassName = '',
@@ -40,11 +42,11 @@ export const EditorialSurface: React.FC<EditorialSurfaceProps> = ({
 
   const variantContainerClasses: Record<EditorialSurfaceVariant, string> = {
     'paper-ivory':
-      'relative bg-cream text-espresso border-y border-divider/80 overflow-hidden',
+      'relative bg-cream editorial-cotton-paper text-espresso border-y border-divider/80 overflow-hidden isolate',
     'relief-dark':
-      'relative bg-burgundy text-cream border-y border-cream/20 overflow-hidden',
+      'relative bg-burgundy text-cream border-y border-cream/20 overflow-hidden isolate',
     'letterpress-card':
-      'relative bg-card/90 text-espresso border border-divider rounded-sm backdrop-blur-sm editorial-letterpress-shadow overflow-hidden',
+      'relative bg-card/90 editorial-cotton-paper text-espresso border border-divider rounded-sm editorial-letterpress-shadow overflow-hidden isolate',
   };
 
   const Component = as;
@@ -55,14 +57,7 @@ export const EditorialSurface: React.FC<EditorialSurfaceProps> = ({
       aria-labelledby={ariaLabelledBy}
       className={`${variantContainerClasses[variant]} ${className}`}
     >
-      {/* Capa decorativa base según variante (acabado minimalista editorial sin clipart SVG) */}
-      {variant === 'paper-ivory' && (
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute inset-0 editorial-paper-grain"
-        />
-      )}
-
+      {/* Capa decorativa base según variante (papel algodón continuo en variantes claras) */}
       {variant === 'relief-dark' && (
         <>
           <div
@@ -82,10 +77,6 @@ export const EditorialSurface: React.FC<EditorialSurfaceProps> = ({
 
       {variant === 'letterpress-card' && (
         <>
-          <div
-            aria-hidden="true"
-            className="pointer-events-none absolute inset-0 editorial-paper-grain opacity-65"
-          />
           {/* Doble marco fino 1px de papelería editorial */}
           <div
             aria-hidden="true"
@@ -115,7 +106,7 @@ export const EditorialSurface: React.FC<EditorialSurfaceProps> = ({
               variant === 'relief-dark'
                 ? 'pointer-events-none select-none absolute inset-0 w-full h-full object-cover object-center opacity-85'
                 : variant === 'letterpress-card'
-                  ? 'pointer-events-none select-none absolute inset-0 w-full h-full object-cover object-center opacity-75'
+                  ? 'pointer-events-none select-none absolute inset-0 w-full h-full object-cover object-center opacity-80 mix-blend-multiply'
                   : 'pointer-events-none select-none absolute inset-0 w-full h-full object-cover object-center opacity-20'
             }
           />
@@ -128,17 +119,20 @@ export const EditorialSurface: React.FC<EditorialSurfaceProps> = ({
           {variant === 'letterpress-card' && (
             <div
               aria-hidden="true"
-              className="pointer-events-none absolute inset-0 bg-card/30"
+              className="pointer-events-none absolute inset-0 bg-card/15"
             />
           )}
           {variant === 'paper-ivory' && (
             <div
               aria-hidden="true"
-              className="pointer-events-none absolute inset-0 bg-cream/35"
+              className="pointer-events-none absolute inset-0 bg-cream/20"
             />
           )}
         </>
       )}
+
+      {/* Ornamento lateral full-bleed opcional (ej. Blind Embossing botánico en márgenes) */}
+      {sideDecoration}
 
       {/* Contenido real */}
       <div className={`relative z-10 ${contentClassName}`}>{children}</div>
