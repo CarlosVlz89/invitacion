@@ -1,0 +1,310 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Fondos y Papelería Editorial (Warm Cream) */
+  --bg-primary: #F2ECE1;
+  --bg-cream: #F2ECE1;
+  --bg-surface: #E6DEC8;
+  --bg-card: rgba(250, 247, 241, 0.90);
+
+  /* Bordes y Filetes 1px */
+  --border-subtle: #D8CEBC;
+  --border-divider: #D8CEBC;
+
+  /* Tipografía sobre Papel Crema */
+  --text-primary: #2D231E;
+  --text-espresso: #2D231E;
+  --text-secondary: #5C4D44;
+  --text-mocha: #5C4D44;
+  --text-muted: #78685E;
+
+  /* Protagonistas del Moodboard: Deep Burgundy & Olive Green */
+  --accent-burgundy: #4F141C;
+  --accent-burgundy-hover: #3E0E15;
+  --accent-olive: #3C4224;
+  --surface-olive-envelope: #555F36;
+  --surface-olive-envelope-dark: #454E2B;
+  --swatch-sage: #7A8463;
+
+  /* Canales RGB para soporte nativo de opacidad en Tailwind CSS v3 */
+  --bg-cream-rgb: 242 236 225;
+  --bg-cream-deep-rgb: 230 222 200;
+  --bg-card-rgb: 250 247 241;
+  --border-divider-rgb: 216 206 188;
+  --text-espresso-rgb: 45 35 30;
+  --text-mocha-rgb: 92 77 68;
+  --text-muted-rgb: 120 104 94;
+  --accent-burgundy-rgb: 79 20 28;
+  --accent-burgundy-hover-rgb: 62 14 21;
+  --accent-olive-rgb: 60 66 36;
+  --surface-olive-envelope-rgb: 85 95 54;
+  --surface-olive-envelope-dark-rgb: 69 78 43;
+  --swatch-sage-rgb: 122 132 99;
+
+  /* Interpolación progresiva de gradientes (fallback seguro para Safari 14+) */
+  --in-oklab: ;
+}
+
+@supports (background: linear-gradient(in oklab, white, black)) {
+  :root {
+    --in-oklab: in oklab;
+  }
+}
+
+@layer base {
+  html {
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    scroll-behavior: smooth;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+
+  body {
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    font-family: 'Plus Jakarta Sans', 'Inter', sans-serif;
+    overflow-x: hidden;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  .font-display {
+    font-family: 'Cormorant Garamond', 'Playfair Display', serif;
+  }
+
+  .font-script {
+    font-family: 'Pinyon Script', cursive;
+  }
+}
+
+@layer components {
+  /* Papel lino crema táctil (#F2ECE1) */
+  .editorial-paper-grain {
+    background-image:
+      radial-gradient(rgba(45, 35, 30, 0.032) 0.75px, transparent 0.75px),
+      radial-gradient(rgba(92, 77, 68, 0.026) 0.75px, transparent 0.75px);
+    background-size: 22px 22px, 14px 14px;
+    background-position: 0 0, 7px 7px;
+  }
+
+  /* Bajorrelieve editorial en Deep Burgundy (#4F141C) para banda Countdown, Medallón y Footer */
+  .editorial-relief-dark-pattern {
+    background-image:
+      radial-gradient(circle at 50% 0%, rgba(242, 236, 225, 0.075) 0%, transparent 58%),
+      radial-gradient(circle at 50% 100%, rgba(242, 236, 225, 0.05) 0%, transparent 55%),
+      repeating-linear-gradient(
+        135deg,
+        rgba(242, 236, 225, 0.022) 0px,
+        rgba(242, 236, 225, 0.022) 1px,
+        transparent 1px,
+        transparent 18px
+      ),
+      repeating-linear-gradient(
+        45deg,
+        rgba(242, 236, 225, 0.016) 0px,
+        rgba(242, 236, 225, 0.016) 1px,
+        transparent 1px,
+        transparent 18px
+      );
+  }
+
+  /* Tarjeta letterpress armonizada con Warm Cream (#FAF7F1) */
+  .editorial-letterpress-shadow {
+    box-shadow:
+      0 1px 2px rgba(45, 35, 30, 0.04),
+      0 18px 46px -20px rgba(45, 35, 30, 0.16),
+      inset 0 1px 0 rgba(250, 247, 241, 0.9);
+  }
+
+  /* Hoja translúcida de papel vegetal / seda (Vellum en Warm Cream) */
+  .editorial-vellum-leaf {
+    background-color: rgba(242, 236, 225, 0.9);
+    background-image:
+      linear-gradient(
+        125deg var(--in-oklab),
+        rgba(250, 247, 241, 0.52) 0%,
+        rgba(242, 236, 225, 0.24) 52%,
+        rgba(230, 222, 200, 0.44) 100%
+      ),
+      radial-gradient(rgba(45, 35, 30, 0.024) 0.75px, transparent 0.75px);
+    background-size: 100% 100%, 16px 16px;
+  }
+
+  /* Relieve táctil de sobre cerrado en Verde Olivo (#555F36 / #454E2B) */
+  .editorial-envelope-body {
+    background: linear-gradient(
+      165deg var(--in-oklab),
+      var(--surface-olive-envelope) 0%,
+      #4E5731 58%,
+      var(--surface-olive-envelope-dark) 100%
+    );
+    box-shadow:
+      0 26px 64px -18px rgba(45, 35, 30, 0.36),
+      0 6px 18px -6px rgba(45, 35, 30, 0.2),
+      inset 0 1px 0 rgba(242, 236, 225, 0.22),
+      inset 0 -1px 0 rgba(36, 42, 22, 0.35);
+  }
+
+  /* Grano sutil de cartulina de algodón sobre el sobre Verde Olivo */
+  .editorial-envelope-grain {
+    background-image:
+      radial-gradient(rgba(242, 236, 225, 0.045) 0.75px, transparent 0.75px),
+      radial-gradient(rgba(32, 38, 19, 0.065) 0.75px, transparent 0.75px);
+    background-size: 20px 20px, 13px 13px;
+    background-position: 0 0, 6px 6px;
+  }
+
+  /* Solapa superior del sobre Verde Olivo en V con punta suavizada y perspectiva 3D */
+  .editorial-envelope-flap {
+    background: linear-gradient(
+      180deg var(--in-oklab),
+      #5B653B 0%,
+      var(--surface-olive-envelope) 58%,
+      var(--surface-olive-envelope-dark) 100%
+    );
+    clip-path: polygon(0 0, 100% 0, 52.5% 98.5%, 50% 100%, 47.5% 98.5%);
+    transform-origin: top center;
+  }
+
+  /* Bolsillo inferior limpio del sobre de boda en papel algodón fino Verde Olivo (sin efecto X) */
+  .editorial-envelope-pocket {
+    background: linear-gradient(
+      180deg var(--in-oklab),
+      var(--surface-olive-envelope-dark) 0%,
+      var(--surface-olive-envelope) 42%,
+      #4E5831 100%
+    );
+    box-shadow: inset 0 24px 48px -18px rgba(24, 30, 12, 0.34);
+  }
+
+  /* Textura sutil de seda/lino para muestras de tela en Dress Code */
+  .editorial-swatch-silk {
+    background-image:
+      linear-gradient(
+        135deg,
+        rgba(250, 247, 241, 0.22) 0%,
+        rgba(250, 247, 241, 0.04) 42%,
+        rgba(45, 35, 30, 0.16) 100%
+      ),
+      repeating-linear-gradient(
+        90deg,
+        rgba(250, 247, 241, 0.03) 0px,
+        rgba(250, 247, 241, 0.03) 1px,
+        transparent 1px,
+        transparent 4px
+      );
+  }
+
+  /* Horas verticales editoriales para el Itinerario */
+  .editorial-vertical-time {
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+  }
+
+  /* Sello de cera Deep Burgundy (#4F141C) con relieve orgánico */
+  .editorial-wax-seal {
+    background: radial-gradient(
+      circle at 32% 28% var(--in-oklab),
+      #6A1D28 0%,
+      var(--accent-burgundy) 52%,
+      var(--accent-burgundy-hover) 100%
+    );
+    box-shadow:
+      0 14px 28px -6px rgba(38, 9, 14, 0.56),
+      0 4px 10px -2px rgba(45, 35, 30, 0.32),
+      inset 0 2px 3px rgba(242, 236, 225, 0.24),
+      inset 0 -3px 6px rgba(32, 6, 10, 0.62);
+  }
+
+  /* Placeholder editorial crema cálido para el medallón */
+  .editorial-cameo-placeholder {
+    background: radial-gradient(
+      circle at 50% 34% var(--in-oklab),
+      var(--bg-primary) 0%,
+      var(--bg-surface) 54%,
+      #C9BCAA 100%
+    );
+  }
+
+  /* Contención nativa de scroll para <dialog> modal sin mutar overflow de body */
+  dialog.editorial-dialog:modal {
+    overscroll-behavior: contain;
+    max-height: calc(100dvh - 2rem);
+    margin: auto;
+  }
+
+  dialog.editorial-dialog::backdrop {
+    background: rgba(62, 14, 21, 0.52);
+    backdrop-filter: blur(4px);
+    overflow: hidden;
+    overscroll-behavior: contain;
+  }
+
+  /* Anular el centrado por defecto del agente de usuario en popover de notificaciones */
+  .editorial-toast-layer[popover] {
+    inset: auto 1rem 5rem 1rem;
+  }
+
+  .editorial-toast-layer[popover]:popover-open {
+    display: flex;
+  }
+
+  @media (min-width: 640px) {
+    .editorial-toast-layer[popover] {
+      inset: auto 1.25rem 5rem auto;
+    }
+  }
+
+  /* Soporte de accesibilidad para Forced Colors Mode (High Contrast) */
+  @media (forced-colors: active) {
+    .editorial-envelope-body {
+      border: 2px solid CanvasText;
+    }
+
+    .editorial-wax-seal {
+      border: 2px solid ButtonText;
+    }
+  }
+}
+
+@layer utilities {
+  .perspective-1000 {
+    perspective: 1000px;
+  }
+
+  .transform-style-3d {
+    transform-style: preserve-3d;
+  }
+
+  .backface-hidden {
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .editorial-pulse-dot {
+      animation: ping 1.8s cubic-bezier(0, 0, 0.2, 1) infinite;
+    }
+
+    .editorial-eq-bar-1 {
+      animation: bounce 1s infinite 100ms;
+    }
+
+    .editorial-eq-bar-2 {
+      animation: bounce 1s infinite 300ms;
+    }
+
+    .editorial-eq-bar-3 {
+      animation: bounce 1s infinite 200ms;
+    }
+  }
+}
