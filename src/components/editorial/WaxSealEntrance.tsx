@@ -4,7 +4,8 @@ import { useGuest } from '../../context/GuestContext';
 import { getEditorialAsset } from '../../config/editorialAssets';
 
 const EDITORIAL_EASE: [number, number, number, number] = [0.22, 1, 0.36, 1];
-const FULL_SEQUENCE_DURATION_MS = 1800;
+const CEREMONIAL_EASE: [number, number, number, number] = [0.65, 0, 0.35, 1];
+const FULL_SEQUENCE_DURATION_MS = 2600;
 const REDUCED_SEQUENCE_DURATION_MS = 520;
 
 export const WaxSealEntrance: React.FC = () => {
@@ -27,7 +28,7 @@ export const WaxSealEntrance: React.FC = () => {
   const envelopeSrc = !envelopeTextureFailed ? envelopeAsset.resolvedSrc : null;
   const waxSealSrc = !waxSealFailed ? waxSealAsset.resolvedSrc : null;
 
-  // Temporizador determinista sincronizado con el cierre de la animación (0.2s delay + 1.55s apertura)
+  // Temporizador determinista sincronizado con el cierre de la animación (0.25s delay + 2.3s apertura)
   useEffect(() => {
     if (!isOpening || isOpened) return;
 
@@ -96,9 +97,9 @@ export const WaxSealEntrance: React.FC = () => {
               : { rotateY: 0, x: '0%' }
           }
           transition={{
-            delay: prefersReducedMotion ? 0 : 0.2,
-            duration: prefersReducedMotion ? 0.5 : 1.55,
-            ease: EDITORIAL_EASE,
+            delay: prefersReducedMotion ? 0 : 0.25,
+            duration: prefersReducedMotion ? 0.5 : 2.3,
+            ease: CEREMONIAL_EASE,
           }}
           className="relative w-1/2 h-full bg-olive-envelope editorial-folio-door-left border-r border-olive-envelope-dark/50 origin-left transform-gpu will-change-transform backface-hidden overflow-hidden"
         >
@@ -139,9 +140,9 @@ export const WaxSealEntrance: React.FC = () => {
               : { rotateY: 0, x: '0%' }
           }
           transition={{
-            delay: prefersReducedMotion ? 0 : 0.2,
-            duration: prefersReducedMotion ? 0.5 : 1.55,
-            ease: EDITORIAL_EASE,
+            delay: prefersReducedMotion ? 0 : 0.25,
+            duration: prefersReducedMotion ? 0.5 : 2.3,
+            ease: CEREMONIAL_EASE,
           }}
           className="relative w-1/2 h-full bg-olive-envelope editorial-folio-door-right border-l border-cream/10 origin-right transform-gpu will-change-transform backface-hidden overflow-hidden"
         >
@@ -200,7 +201,7 @@ export const WaxSealEntrance: React.FC = () => {
                 ? { scale: 0.94, opacity: 0 }
                 : { scale: 1, opacity: 1 }
             }
-            transition={{ duration: 0.4, ease: EDITORIAL_EASE }}
+            transition={{ duration: 0.45, ease: EDITORIAL_EASE }}
             aria-label="Abrir invitación de Montse y Gerardo"
             className="group relative w-28 h-28 sm:w-32 sm:h-32 flex items-center justify-center cursor-pointer transform-gpu will-change-transform rounded-full focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-cream disabled:cursor-default"
           >
