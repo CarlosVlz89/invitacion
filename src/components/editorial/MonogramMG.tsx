@@ -4,7 +4,7 @@ export interface MonogramMGProps {
   className?: string;
   decorative?: boolean;
   label?: string;
-  variant?: 'solid' | 'foil-gold';
+  variant?: 'solid' | 'foil-gold' | 'burgundy-seal';
 }
 
 export const MonogramMG: React.FC<MonogramMGProps> = ({
@@ -14,6 +14,31 @@ export const MonogramMG: React.FC<MonogramMGProps> = ({
   variant = 'solid',
 }) => {
   const foilGradientId = useId();
+
+  if (variant === 'burgundy-seal') {
+    return (
+      <span
+        className={`relative inline-flex items-center justify-center rounded-full bg-burgundy editorial-burgundy-seal select-none ${className}`}
+        aria-hidden={decorative ? true : undefined}
+        role={decorative ? undefined : 'img'}
+        aria-label={decorative ? undefined : label}
+      >
+        {/* Doble anillo interior fino en oro viejo suave */}
+        <span
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-1.5 rounded-full border border-[#E6D2A2]/50 editorial-burgundy-seal-ring"
+        />
+        <span
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-[9px] rounded-full border border-[#E6D2A2]/25 border-dashed"
+        />
+        <span className="pointer-events-none relative z-10 font-display font-medium text-[0.95rem] md:text-[1.1rem] tracking-[0.12em] pl-[0.12em] leading-none editorial-foil-gold">
+          M &amp; G
+        </span>
+      </span>
+    );
+  }
+
   const isFoilGold = variant === 'foil-gold';
 
   if (isFoilGold) {

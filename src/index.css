@@ -279,6 +279,33 @@
       inset 0 -3px 6px rgba(32, 6, 10, 0.62);
   }
 
+  /* Medallón editorial Deep Burgundy (#4F141C) para monograma M & G en portada */
+  .editorial-burgundy-seal {
+    background-color: var(--accent-burgundy);
+    background-image: radial-gradient(
+      circle at 34% 28% var(--in-oklab),
+      #5B1721 0%,
+      var(--accent-burgundy) 54%,
+      #3A0C13 100%
+    );
+    box-shadow:
+      0 10px 24px -8px rgba(45, 35, 30, 0.34),
+      0 3px 8px -2px rgba(79, 20, 28, 0.28),
+      inset 0 1.5px 2px rgba(242, 236, 225, 0.18),
+      inset 0 -2.5px 5px rgba(28, 6, 10, 0.55);
+  }
+
+  /* Desvanecimiento suave para esquinas botánicas ancladas en tarjetas letterpress */
+  .editorial-botanical-fade-top {
+    -webkit-mask-image: linear-gradient(to bottom, #000 72%, transparent 100%);
+    mask-image: linear-gradient(to bottom, #000 72%, transparent 100%);
+  }
+
+  .editorial-botanical-fade-bottom {
+    -webkit-mask-image: linear-gradient(to top, #000 72%, transparent 100%);
+    mask-image: linear-gradient(to top, #000 72%, transparent 100%);
+  }
+
   /* Placeholder editorial crema cálido para el medallón */
   .editorial-cameo-placeholder {
     background: radial-gradient(
@@ -350,6 +377,22 @@
 
     .editorial-wax-seal {
       border: 2px solid ButtonText;
+    }
+
+    .editorial-burgundy-seal {
+      background-image: none;
+      background-color: Canvas;
+      border: 2px solid CanvasText;
+      box-shadow: none;
+    }
+
+    .editorial-burgundy-seal-ring {
+      border-color: CanvasText;
+    }
+
+    .editorial-botanical-fade-top,
+    .editorial-botanical-fade-bottom {
+      display: none;
     }
   }
 }

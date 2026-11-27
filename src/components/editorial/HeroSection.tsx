@@ -75,7 +75,8 @@ export const HeroSection: React.FC = () => {
         <div className="flex flex-col items-center md:mb-6">
           <div className="hidden md:flex mb-6">
             <MonogramMG
-              className="w-16 h-16 text-burgundy"
+              variant="burgundy-seal"
+              className="w-16 h-16 md:w-20 md:h-20"
               decorative={false}
               label="Monograma de boda M y G"
             />

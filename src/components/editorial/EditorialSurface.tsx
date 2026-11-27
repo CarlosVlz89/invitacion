@@ -89,46 +89,79 @@ export const EditorialSurface: React.FC<EditorialSurfaceProps> = ({
         </>
       )}
 
-      {/* Capa opcional de textura raster real resuelta desde editorialAssets (sin object-fill) */}
-      {resolvedTextureSrc && asset && (
+      {/* Capa opcional de textura raster real resuelta desde editorialAssets */}
+      {resolvedTextureSrc && asset && variant === 'letterpress-card' ? (
         <>
-          <img
-            src={resolvedTextureSrc}
-            alt=""
+          {/* Esquinas superiores e inferiores ancladas para evitar recorte en Desktop */}
+          <div
             aria-hidden="true"
-            width={asset.recommendedDimensions.width}
-            height={asset.recommendedDimensions.height}
-            loading={asset.loadingPriority}
-            decoding={asset.loadingPriority === 'eager' ? 'sync' : 'async'}
-            fetchPriority={asset.fetchPriority}
-            onError={() => setTextureFailed(true)}
-            className={
-              variant === 'relief-dark'
-                ? 'pointer-events-none select-none absolute inset-0 w-full h-full object-cover object-center opacity-85'
-                : variant === 'letterpress-card'
-                  ? 'pointer-events-none select-none absolute inset-0 w-full h-full object-cover object-center opacity-80 mix-blend-multiply'
-                  : 'pointer-events-none select-none absolute inset-0 w-full h-full object-cover object-center opacity-20'
-            }
-          />
-          {variant === 'relief-dark' && (
-            <div
+            className="pointer-events-none select-none absolute inset-x-2.5 sm:inset-x-4 top-2.5 sm:top-4 h-28 sm:h-40 md:h-44 overflow-hidden mix-blend-multiply editorial-botanical-fade-top"
+          >
+            <img
+              src={resolvedTextureSrc}
+              alt=""
               aria-hidden="true"
-              className="pointer-events-none absolute inset-0 bg-burgundy/30"
+              width={asset.recommendedDimensions.width}
+              height={asset.recommendedDimensions.height}
+              loading={asset.loadingPriority}
+              decoding={asset.loadingPriority === 'eager' ? 'sync' : 'async'}
+              fetchPriority={asset.fetchPriority}
+              onError={() => setTextureFailed(true)}
+              className="w-full h-full object-cover object-top opacity-95"
             />
-          )}
-          {variant === 'letterpress-card' && (
-            <div
+          </div>
+          <div
+            aria-hidden="true"
+            className="pointer-events-none select-none absolute inset-x-2.5 sm:inset-x-4 bottom-2.5 sm:bottom-4 h-28 sm:h-40 md:h-44 overflow-hidden mix-blend-multiply editorial-botanical-fade-bottom"
+          >
+            <img
+              src={resolvedTextureSrc}
+              alt=""
               aria-hidden="true"
-              className="pointer-events-none absolute inset-0 bg-card/15"
+              width={asset.recommendedDimensions.width}
+              height={asset.recommendedDimensions.height}
+              loading={asset.loadingPriority}
+              decoding={asset.loadingPriority === 'eager' ? 'sync' : 'async'}
+              fetchPriority={asset.fetchPriority}
+              onError={() => setTextureFailed(true)}
+              className="w-full h-full object-cover object-bottom opacity-95"
             />
-          )}
-          {variant === 'paper-ivory' && (
-            <div
-              aria-hidden="true"
-              className="pointer-events-none absolute inset-0 bg-cream/20"
-            />
-          )}
+          </div>
         </>
+      ) : (
+        resolvedTextureSrc &&
+        asset && (
+          <>
+            <img
+              src={resolvedTextureSrc}
+              alt=""
+              aria-hidden="true"
+              width={asset.recommendedDimensions.width}
+              height={asset.recommendedDimensions.height}
+              loading={asset.loadingPriority}
+              decoding={asset.loadingPriority === 'eager' ? 'sync' : 'async'}
+              fetchPriority={asset.fetchPriority}
+              onError={() => setTextureFailed(true)}
+              className={
+                variant === 'relief-dark'
+                  ? 'pointer-events-none select-none absolute inset-0 w-full h-full object-cover object-center opacity-85'
+                  : 'pointer-events-none select-none absolute inset-0 w-full h-full object-cover object-center opacity-20'
+              }
+            />
+            {variant === 'relief-dark' && (
+              <div
+                aria-hidden="true"
+                className="pointer-events-none absolute inset-0 bg-burgundy/30"
+              />
+            )}
+            {variant === 'paper-ivory' && (
+              <div
+                aria-hidden="true"
+                className="pointer-events-none absolute inset-0 bg-cream/20"
+              />
+            )}
+          </>
+        )
       )}
 
       {/* Ornamento lateral full-bleed opcional (ej. Blind Embossing botánico en márgenes) */}

@@ -29,6 +29,7 @@ import {
   buildRsvpWhatsAppUrl,
 } from '../../services/whatsappService';
 import { useToast } from '../common/ToastProvider';
+import { getEditorialAsset } from '../../config/editorialAssets';
 import { EditorialSurface } from '../editorial/EditorialSurface';
 
 const EDITORIAL_EASE: [number, number, number, number] = [0.22, 1, 0.36, 1];
@@ -109,7 +110,13 @@ export const RsvpSection: React.FC<RsvpSectionProps> = ({ onOpenLookup }) => {
   const prefersReducedMotion = useReducedMotion();
 
   const [isEditing, setIsEditing] = useState<boolean>(false);
+  const [branchFailed, setBranchFailed] = useState<boolean>(false);
   const [isPending, startTransition] = useTransition();
+
+  const botanicalBranchAsset = getEditorialAsset('botanicalEmbossBranch');
+  const botanicalBranchSrc = !branchFailed
+    ? botanicalBranchAsset.resolvedSrc
+    : null;
 
   const dietaryFieldId = useId();
   const dietaryErrorId = useId();
@@ -292,6 +299,37 @@ export const RsvpSection: React.FC<RsvpSectionProps> = ({ onOpenLookup }) => {
           as="article"
           variant="letterpress-card"
           textureAssetKey="botanicalCardFrame"
+          sideDecoration={
+            botanicalBranchSrc ? (
+              <div
+                aria-hidden="true"
+                className="pointer-events-none select-none absolute inset-3.5 sm:inset-5 overflow-hidden z-[2]"
+              >
+                <img
+                  src={botanicalBranchSrc}
+                  alt=""
+                  aria-hidden="true"
+                  width={botanicalBranchAsset.recommendedDimensions.width}
+                  height={botanicalBranchAsset.recommendedDimensions.height}
+                  loading="lazy"
+                  decoding="async"
+                  onError={() => setBranchFailed(true)}
+                  className="pointer-events-none select-none absolute -left-2 sm:-left-1 top-1/2 -translate-y-1/2 w-14 sm:w-20 md:w-24 h-auto opacity-45 sm:opacity-55 mix-blend-multiply"
+                />
+                <img
+                  src={botanicalBranchSrc}
+                  alt=""
+                  aria-hidden="true"
+                  width={botanicalBranchAsset.recommendedDimensions.width}
+                  height={botanicalBranchAsset.recommendedDimensions.height}
+                  loading="lazy"
+                  decoding="async"
+                  onError={() => setBranchFailed(true)}
+                  className="pointer-events-none select-none absolute -right-2 sm:-right-1 top-1/2 -translate-y-1/2 w-14 sm:w-20 md:w-24 h-auto -scale-x-100 opacity-45 sm:opacity-55 mix-blend-multiply"
+                />
+              </div>
+            ) : undefined
+          }
           className="w-full"
           contentClassName="px-6 py-10 sm:px-12 sm:py-14"
         >
