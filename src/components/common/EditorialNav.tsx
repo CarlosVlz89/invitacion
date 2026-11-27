@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Menu, X } from 'lucide-react';
 import { useGuest } from '../../context/GuestContext';
+import { useFloatingControlsVisible } from '../../hooks/useFloatingControlsVisible';
 import { TierType } from '../../types/guest';
 
 interface NavLinkItem {
@@ -25,10 +26,12 @@ function getNavLinksForTier(tier: TierType): readonly NavLinkItem[] {
 
 export const EditorialNav: React.FC = () => {
   const { guest, isOpened } = useGuest();
+  const controlsVisible = useFloatingControlsVisible();
   const [menuOpen, setMenuOpen] = useState(false);
   const navContainerRef = useRef<HTMLElement | null>(null);
 
   const visibleLinks = getNavLinksForTier(guest.tier);
+  const isNavVisible = controlsVisible || menuOpen;
 
   useEffect(() => {
     if (!menuOpen) return;
@@ -66,8 +69,14 @@ export const EditorialNav: React.FC = () => {
   return (
     <nav
       ref={navContainerRef}
+      data-testid="editorial-nav"
+      data-floating-visible={isNavVisible ? 'true' : 'false'}
       aria-label="Índice de la invitación"
-      className="fixed top-4 right-4 z-30 flex flex-col items-end"
+      className={`fixed top-4 right-4 z-30 flex flex-col items-end transform-gpu transition-[transform,opacity] duration-300 ease-out focus-within:translate-y-0 focus-within:opacity-100 focus-within:pointer-events-auto ${
+        isNavVisible
+          ? 'translate-y-0 opacity-100 pointer-events-auto'
+          : '-translate-y-4 opacity-0 pointer-events-none motion-reduce:translate-y-0'
+      }`}
     >
       {/* Único botón discreto en esquina superior derecha (sin barra horizontal fija) */}
       <button
