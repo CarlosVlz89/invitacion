@@ -4,8 +4,8 @@ import { useGuest } from '../../context/GuestContext';
 import { getEditorialAsset } from '../../config/editorialAssets';
 
 const EDITORIAL_EASE: [number, number, number, number] = [0.22, 1, 0.36, 1];
-const FULL_SEQUENCE_DURATION_MS = 1150;
-const REDUCED_SEQUENCE_DURATION_MS = 380;
+const FULL_SEQUENCE_DURATION_MS = 1800;
+const REDUCED_SEQUENCE_DURATION_MS = 520;
 
 export const WaxSealEntrance: React.FC = () => {
   const {
@@ -20,17 +20,14 @@ export const WaxSealEntrance: React.FC = () => {
   const prefersReducedMotion = useReducedMotion();
   const [envelopeTextureFailed, setEnvelopeTextureFailed] = useState(false);
   const [waxSealFailed, setWaxSealFailed] = useState(false);
-  const [vellumTextureFailed, setVellumTextureFailed] = useState(false);
 
   const envelopeAsset = getEditorialAsset('envelopeTexture');
   const waxSealAsset = getEditorialAsset('waxSealBurgundy');
-  const vellumAsset = getEditorialAsset('vellumOverlay');
 
   const envelopeSrc = !envelopeTextureFailed ? envelopeAsset.resolvedSrc : null;
   const waxSealSrc = !waxSealFailed ? waxSealAsset.resolvedSrc : null;
-  const vellumSrc = !vellumTextureFailed ? vellumAsset.resolvedSrc : null;
 
-  // Temporizador determinista para finalizar el desmontaje sin depender solo de callbacks
+  // Temporizador determinista sincronizado con el cierre de la animación (0.2s delay + 1.55s apertura)
   useEffect(() => {
     if (!isOpening || isOpened) return;
 
@@ -57,7 +54,7 @@ export const WaxSealEntrance: React.FC = () => {
     // 1. Disparo síncrono de desbloqueo y reproducción de audio DENTRO del gesto de usuario
     unlockAndPlayAudio();
 
-    // 2. Iniciar secuencia visual de apertura 3D en 2 tiempos del díptico vertical
+    // 2. Iniciar apertura pausada directa hacia la portada HeroSection
     startEnvelopeOpening();
   };
 
@@ -79,57 +76,28 @@ export const WaxSealEntrance: React.FC = () => {
       }
       transition={
         prefersReducedMotion
-          ? { duration: 0.35, ease: 'easeOut' }
+          ? { duration: 0.5, ease: 'easeOut' }
           : { duration: 0.2 }
       }
-      className="fixed inset-0 z-50 w-screen h-[100dvh] overflow-hidden select-none"
+      className={`fixed inset-0 z-50 w-screen h-[100dvh] bg-transparent overflow-hidden select-none ${
+        isOpening ? 'pointer-events-none' : ''
+      }`}
     >
-      {/* Capa Interior (Tiempo 2): Velo translúcido Vellum que se desvanece suavemente hacia la portada Hero */}
-      <motion.div
-        aria-hidden="true"
-        initial={{ opacity: 1, scale: 1 }}
-        animate={
-          isOpening && !prefersReducedMotion
-            ? { opacity: 0, scale: 1.02 }
-            : { opacity: 1, scale: 1 }
-        }
-        transition={{
-          delay: prefersReducedMotion ? 0 : 0.56,
-          duration: prefersReducedMotion ? 0.35 : 0.54,
-          ease: EDITORIAL_EASE,
-        }}
-        className="pointer-events-none absolute inset-0 bg-cream/85 editorial-vellum-leaf backdrop-blur-md transform-gpu will-change-transform"
-      >
-        {vellumSrc && (
-          <img
-            src={vellumSrc}
-            alt=""
-            width={vellumAsset.recommendedDimensions.width}
-            height={vellumAsset.recommendedDimensions.height}
-            loading="eager"
-            decoding="sync"
-            fetchPriority="high"
-            onError={() => setVellumTextureFailed(true)}
-            className="w-full h-full object-cover object-center opacity-60"
-          />
-        )}
-      </motion.div>
-
-      {/* Capa Principal: Díptico Vertical 3D de Dos Hojas Full-Bleed en Verde Olivo */}
+      {/* Díptico Vertical 3D de Dos Hojas Full-Bleed en Verde Olivo con Revelado Directo al Hero */}
       <div className="relative z-10 w-full h-full flex perspective-1000 transform-style-3d overflow-hidden">
         {/* Hoja Izquierda del Díptico */}
         <motion.div
           aria-hidden="true"
           data-testid="folio-door-left"
-          initial={{ rotateY: 0, x: '0%', opacity: 1 }}
+          initial={{ rotateY: 0, x: '0%' }}
           animate={
             isOpening && !prefersReducedMotion
-              ? { rotateY: -42, x: '-102%', opacity: 0.25 }
-              : { rotateY: 0, x: '0%', opacity: 1 }
+              ? { rotateY: -46, x: '-104%' }
+              : { rotateY: 0, x: '0%' }
           }
           transition={{
-            delay: prefersReducedMotion ? 0 : 0.22,
-            duration: prefersReducedMotion ? 0.35 : 0.74,
+            delay: prefersReducedMotion ? 0 : 0.2,
+            duration: prefersReducedMotion ? 0.5 : 1.55,
             ease: EDITORIAL_EASE,
           }}
           className="relative w-1/2 h-full bg-olive-envelope editorial-folio-door-left border-r border-olive-envelope-dark/50 origin-left transform-gpu will-change-transform backface-hidden overflow-hidden"
@@ -164,15 +132,15 @@ export const WaxSealEntrance: React.FC = () => {
         <motion.div
           aria-hidden="true"
           data-testid="folio-door-right"
-          initial={{ rotateY: 0, x: '0%', opacity: 1 }}
+          initial={{ rotateY: 0, x: '0%' }}
           animate={
             isOpening && !prefersReducedMotion
-              ? { rotateY: 42, x: '102%', opacity: 0.25 }
-              : { rotateY: 0, x: '0%', opacity: 1 }
+              ? { rotateY: 46, x: '104%' }
+              : { rotateY: 0, x: '0%' }
           }
           transition={{
-            delay: prefersReducedMotion ? 0 : 0.22,
-            duration: prefersReducedMotion ? 0.35 : 0.74,
+            delay: prefersReducedMotion ? 0 : 0.2,
+            duration: prefersReducedMotion ? 0.5 : 1.55,
             ease: EDITORIAL_EASE,
           }}
           className="relative w-1/2 h-full bg-olive-envelope editorial-folio-door-right border-l border-cream/10 origin-right transform-gpu will-change-transform backface-hidden overflow-hidden"
@@ -205,7 +173,7 @@ export const WaxSealEntrance: React.FC = () => {
         {/* Destinatario Editorial en Caligrafía Pinyon Script con Aire Generoso Arriba del Sello */}
         <motion.div
           animate={isOpening ? { opacity: 0, y: -10 } : { opacity: 1, y: 0 }}
-          transition={{ duration: 0.28, ease: EDITORIAL_EASE }}
+          transition={{ duration: 0.36, ease: EDITORIAL_EASE }}
           className="pointer-events-none absolute inset-x-0 top-[14%] sm:top-[16%] z-20 px-6 flex flex-col items-center text-center"
         >
           <p className="text-[11px] uppercase tracking-[0.34em] text-cream/90 font-sans font-medium">
@@ -229,10 +197,10 @@ export const WaxSealEntrance: React.FC = () => {
             whileTap={prefersReducedMotion ? undefined : { scale: 0.96 }}
             animate={
               isOpening && !prefersReducedMotion
-                ? { scale: [1, 1.04, 0.92], opacity: [1, 1, 0] }
+                ? { scale: 0.94, opacity: 0 }
                 : { scale: 1, opacity: 1 }
             }
-            transition={{ duration: 0.3, ease: EDITORIAL_EASE }}
+            transition={{ duration: 0.4, ease: EDITORIAL_EASE }}
             aria-label="Abrir invitación de Montse y Gerardo"
             className="group relative w-28 h-28 sm:w-32 sm:h-32 flex items-center justify-center cursor-pointer transform-gpu will-change-transform rounded-full focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-cream disabled:cursor-default"
           >
@@ -266,13 +234,16 @@ export const WaxSealEntrance: React.FC = () => {
           </motion.button>
         </div>
 
-        {/* Fecha Blindada por Tier en la Zona Inferior Despejada (sin texto instructivo explícito) */}
+        {/* Fecha Blindada por Tier en Tipografía Serif Editorial */}
         <motion.div
           animate={isOpening ? { opacity: 0, y: 8 } : { opacity: 1, y: 0 }}
-          transition={{ duration: 0.26, ease: EDITORIAL_EASE }}
+          transition={{ duration: 0.36, ease: EDITORIAL_EASE }}
           className="pointer-events-none absolute inset-x-0 bottom-[13%] sm:bottom-[15%] z-20 px-6 flex flex-col items-center text-center"
         >
-          <p className="text-[11px] uppercase tracking-[0.32em] text-cream/90 font-sans">
+          <p
+            data-testid="envelope-date"
+            className="font-serif text-sm sm:text-base uppercase tracking-[0.22em] tabular-nums text-cream/95 font-normal"
+          >
             {envelopeDateLabel}
           </p>
         </motion.div>

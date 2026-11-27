@@ -25,6 +25,7 @@ export default {
       },
       fontFamily: {
         display: ['Cormorant Garamond', 'Playfair Display', 'serif'],
+        serif: ['Cormorant Garamond', 'Playfair Display', 'serif'],
         script: ['Pinyon Script', 'cursive'],
         sans: ['Plus Jakarta Sans', 'Inter', 'sans-serif'],
       },
