@@ -4,7 +4,7 @@ import { useGuest } from '../../context/GuestContext';
 import { getEditorialAsset } from '../../config/editorialAssets';
 
 const EDITORIAL_EASE: [number, number, number, number] = [0.22, 1, 0.36, 1];
-const FULL_SEQUENCE_DURATION_MS = 1200;
+const FULL_SEQUENCE_DURATION_MS = 1150;
 const REDUCED_SEQUENCE_DURATION_MS = 380;
 
 export const WaxSealEntrance: React.FC = () => {
@@ -19,17 +19,14 @@ export const WaxSealEntrance: React.FC = () => {
 
   const prefersReducedMotion = useReducedMotion();
   const [envelopeTextureFailed, setEnvelopeTextureFailed] = useState(false);
-  const [liningTextureFailed, setLiningTextureFailed] = useState(false);
   const [waxSealFailed, setWaxSealFailed] = useState(false);
   const [vellumTextureFailed, setVellumTextureFailed] = useState(false);
 
   const envelopeAsset = getEditorialAsset('envelopeTexture');
-  const liningAsset = getEditorialAsset('envelopeLiningOlive');
   const waxSealAsset = getEditorialAsset('waxSealBurgundy');
   const vellumAsset = getEditorialAsset('vellumOverlay');
 
   const envelopeSrc = !envelopeTextureFailed ? envelopeAsset.resolvedSrc : null;
-  const liningSrc = !liningTextureFailed ? liningAsset.resolvedSrc : null;
   const waxSealSrc = !waxSealFailed ? waxSealAsset.resolvedSrc : null;
   const vellumSrc = !vellumTextureFailed ? vellumAsset.resolvedSrc : null;
 
@@ -60,7 +57,7 @@ export const WaxSealEntrance: React.FC = () => {
     // 1. Disparo síncrono de desbloqueo y reproducción de audio DENTRO del gesto de usuario
     unlockAndPlayAudio();
 
-    // 2. Iniciar secuencia visual de apertura 3D en 2 tiempos
+    // 2. Iniciar secuencia visual de apertura 3D en 2 tiempos del díptico vertical
     startEnvelopeOpening();
   };
 
@@ -87,74 +84,9 @@ export const WaxSealEntrance: React.FC = () => {
       }
       className="fixed inset-0 z-50 w-screen h-[100dvh] overflow-hidden select-none"
     >
-      {/* Capa Tiempo 2 (0.48s - 1.15s): Doble hoja simétrica de papel vegetal (Vellum en Warm Cream) */}
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0 flex overflow-hidden"
-      >
-        <motion.div
-          initial={{ x: '0%', opacity: 1 }}
-          animate={
-            isOpening && !prefersReducedMotion
-              ? { x: '-104%', opacity: 0.15 }
-              : { x: '0%', opacity: 1 }
-          }
-          transition={{
-            delay: prefersReducedMotion ? 0 : 0.48,
-            duration: prefersReducedMotion ? 0.35 : 0.65,
-            ease: EDITORIAL_EASE,
-          }}
-          className="relative w-1/2 h-full bg-cream/90 editorial-vellum-leaf backdrop-blur-md border-r border-divider/90 transform-gpu will-change-transform backface-hidden"
-        >
-          {vellumSrc && (
-            <img
-              src={vellumSrc}
-              alt=""
-              width={vellumAsset.recommendedDimensions.width}
-              height={vellumAsset.recommendedDimensions.height}
-              loading="eager"
-              decoding="sync"
-              fetchPriority="high"
-              onError={() => setVellumTextureFailed(true)}
-              className="absolute inset-0 w-full h-full object-cover object-center opacity-55"
-            />
-          )}
-          <div className="absolute inset-y-0 right-0 w-6 bg-gradient-to-l from-olive-envelope-dark/[0.12] to-transparent" />
-        </motion.div>
-
-        <motion.div
-          initial={{ x: '0%', opacity: 1 }}
-          animate={
-            isOpening && !prefersReducedMotion
-              ? { x: '104%', opacity: 0.15 }
-              : { x: '0%', opacity: 1 }
-          }
-          transition={{
-            delay: prefersReducedMotion ? 0 : 0.48,
-            duration: prefersReducedMotion ? 0.35 : 0.65,
-            ease: EDITORIAL_EASE,
-          }}
-          className="relative w-1/2 h-full bg-cream/90 editorial-vellum-leaf backdrop-blur-md border-l border-divider/90 transform-gpu will-change-transform backface-hidden"
-        >
-          {vellumSrc && (
-            <img
-              src={vellumSrc}
-              alt=""
-              width={vellumAsset.recommendedDimensions.width}
-              height={vellumAsset.recommendedDimensions.height}
-              loading="eager"
-              decoding="sync"
-              fetchPriority="high"
-              onError={() => setVellumTextureFailed(true)}
-              className="absolute inset-0 w-full h-full object-cover object-center opacity-55 scale-x-[-1]"
-            />
-          )}
-          <div className="absolute inset-y-0 left-0 w-6 bg-gradient-to-r from-olive-envelope-dark/[0.12] to-transparent" />
-        </motion.div>
-      </div>
-
-      {/* Capa Tiempo 1 (0.0s - 0.68s): Sobre de Boda Full-Bleed en Papel Algodón Fino Verde Olivo */}
+      {/* Capa Interior (Tiempo 2): Velo translúcido Vellum que se desvanece suavemente hacia la portada Hero */}
       <motion.div
+        aria-hidden="true"
         initial={{ opacity: 1, scale: 1 }}
         animate={
           isOpening && !prefersReducedMotion
@@ -162,38 +94,45 @@ export const WaxSealEntrance: React.FC = () => {
             : { opacity: 1, scale: 1 }
         }
         transition={{
-          delay: prefersReducedMotion ? 0 : 0.36,
-          duration: prefersReducedMotion ? 0.35 : 0.34,
+          delay: prefersReducedMotion ? 0 : 0.56,
+          duration: prefersReducedMotion ? 0.35 : 0.54,
           ease: EDITORIAL_EASE,
         }}
-        className="relative z-10 w-full h-full bg-olive-envelope editorial-envelope-body perspective-1000 transform-style-3d overflow-hidden"
+        className="pointer-events-none absolute inset-0 bg-cream/85 editorial-vellum-leaf backdrop-blur-md transform-gpu will-change-transform"
       >
-        {/* Forro interior botánico verde olivo revelado al desplegar la solapa superior 3D */}
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute inset-x-0 top-0 h-[52%] overflow-hidden bg-olive-envelope-dark"
-        >
-          {liningSrc ? (
-            <img
-              src={liningSrc}
-              alt=""
-              width={liningAsset.recommendedDimensions.width}
-              height={liningAsset.recommendedDimensions.height}
-              loading="eager"
-              decoding="sync"
-              onError={() => setLiningTextureFailed(true)}
-              className="w-full h-full object-cover object-center opacity-85"
-            />
-          ) : (
-            <div className="w-full h-full editorial-envelope-grain opacity-90" />
-          )}
-          <div className="absolute inset-0 bg-olive-envelope-dark/25" />
-        </div>
+        {vellumSrc && (
+          <img
+            src={vellumSrc}
+            alt=""
+            width={vellumAsset.recommendedDimensions.width}
+            height={vellumAsset.recommendedDimensions.height}
+            loading="eager"
+            decoding="sync"
+            fetchPriority="high"
+            onError={() => setVellumTextureFailed(true)}
+            className="w-full h-full object-cover object-center opacity-60"
+          />
+        )}
+      </motion.div>
 
-        {/* Bolsillo Inferior Limpio en Papel Algodón Fino Verde Olivo (sin cruce X rígido) */}
-        <div
+      {/* Capa Principal: Díptico Vertical 3D de Dos Hojas Full-Bleed en Verde Olivo */}
+      <div className="relative z-10 w-full h-full flex perspective-1000 transform-style-3d overflow-hidden">
+        {/* Hoja Izquierda del Díptico */}
+        <motion.div
           aria-hidden="true"
-          className="pointer-events-none absolute inset-0 z-[3] editorial-envelope-pocket overflow-hidden"
+          data-testid="folio-door-left"
+          initial={{ rotateY: 0, x: '0%', opacity: 1 }}
+          animate={
+            isOpening && !prefersReducedMotion
+              ? { rotateY: -42, x: '-102%', opacity: 0.25 }
+              : { rotateY: 0, x: '0%', opacity: 1 }
+          }
+          transition={{
+            delay: prefersReducedMotion ? 0 : 0.22,
+            duration: prefersReducedMotion ? 0.35 : 0.74,
+            ease: EDITORIAL_EASE,
+          }}
+          className="relative w-1/2 h-full bg-olive-envelope editorial-folio-door-left border-r border-olive-envelope-dark/50 origin-left transform-gpu will-change-transform backface-hidden overflow-hidden"
         >
           {envelopeSrc ? (
             <img
@@ -205,83 +144,83 @@ export const WaxSealEntrance: React.FC = () => {
               decoding="sync"
               fetchPriority="high"
               onError={() => setEnvelopeTextureFailed(true)}
-              className="w-full h-full object-cover object-center opacity-90"
+              className="w-full h-full object-cover object-left opacity-92"
             />
           ) : (
             <div className="w-full h-full editorial-envelope-grain" />
           )}
-          {/* Sombreo lateral ultra-suave en los bordes para profundidad táctil */}
-          <div className="absolute inset-0 bg-gradient-to-b from-olive-envelope-dark/25 via-transparent to-olive-envelope-dark/30" />
-          <div className="absolute inset-y-0 left-0 w-10 sm:w-20 bg-gradient-to-r from-olive-envelope-dark/22 to-transparent" />
-          <div className="absolute inset-y-0 right-0 w-10 sm:w-20 bg-gradient-to-l from-olive-envelope-dark/22 to-transparent" />
-          {/* Filete interior ultra-sutil de papelería */}
-          <div className="absolute inset-4 sm:inset-7 border border-cream/15 pointer-events-none" />
-        </div>
 
-        {/* Solapa Superior Triangular en V (0% a 47% de altura) con Sombra Proyectada Realista y Rotación 3D */}
-        <motion.div
-          aria-hidden="true"
-          initial={{ rotateX: 0 }}
-          animate={
-            isOpening && !prefersReducedMotion
-              ? { rotateX: -174 }
-              : { rotateX: 0 }
-          }
-          transition={{
-            duration: prefersReducedMotion ? 0.35 : 0.62,
-            ease: EDITORIAL_EASE,
-          }}
-          className="pointer-events-none absolute inset-x-0 top-0 h-[47%] z-[8] transform-gpu will-change-transform backface-hidden origin-top drop-shadow-[0_18px_28px_rgba(20,26,10,0.44)]"
-        >
-          <div className="relative w-full h-full editorial-envelope-flap overflow-hidden">
-            {envelopeSrc ? (
-              <img
-                src={envelopeSrc}
-                alt=""
-                width={envelopeAsset.recommendedDimensions.width}
-                height={envelopeAsset.recommendedDimensions.height}
-                loading="eager"
-                decoding="sync"
-                fetchPriority="high"
-                onError={() => setEnvelopeTextureFailed(true)}
-                className="w-full h-full object-cover object-center opacity-88"
-              />
-            ) : (
-              <div className="w-full h-full editorial-envelope-grain" />
-            )}
-            <div className="absolute inset-0 bg-gradient-to-b from-cream/[0.04] via-transparent to-olive-envelope-dark/28" />
-          </div>
-          <svg
-            viewBox="0 0 1000 470"
-            preserveAspectRatio="none"
-            className="absolute inset-0 w-full h-full"
-          >
-            <path
-              d="M0 0 L475 462 Q500 472 525 462 L1000 0"
-              fill="none"
-              stroke="rgba(242, 236, 225, 0.24)"
-              strokeWidth="1.15"
-              vectorEffect="non-scaling-stroke"
-            />
-          </svg>
+          {/* Sombra interior suave y micro-brillo de costura central */}
+          <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-olive-envelope-dark/22 via-transparent to-olive-envelope-dark/28" />
+          <div className="pointer-events-none absolute inset-y-0 left-0 w-10 sm:w-20 bg-gradient-to-r from-olive-envelope-dark/24 to-transparent" />
+          <div className="pointer-events-none absolute inset-y-0 right-0 w-8 bg-gradient-to-l from-olive-envelope-dark/28 to-transparent" />
+          <div className="pointer-events-none absolute inset-y-0 right-0 w-px bg-cream/10" />
+
+          {/* Filete perimetral editorial continuo de papelería */}
+          <div className="pointer-events-none absolute top-4 bottom-4 left-4 right-0 sm:top-7 sm:bottom-7 sm:left-7 border-y border-l border-cream/15" />
         </motion.div>
 
-        {/* Destinatario en la Zona Superior de la Solapa con Amplio Aire */}
+        {/* Hoja Derecha del Díptico */}
+        <motion.div
+          aria-hidden="true"
+          data-testid="folio-door-right"
+          initial={{ rotateY: 0, x: '0%', opacity: 1 }}
+          animate={
+            isOpening && !prefersReducedMotion
+              ? { rotateY: 42, x: '102%', opacity: 0.25 }
+              : { rotateY: 0, x: '0%', opacity: 1 }
+          }
+          transition={{
+            delay: prefersReducedMotion ? 0 : 0.22,
+            duration: prefersReducedMotion ? 0.35 : 0.74,
+            ease: EDITORIAL_EASE,
+          }}
+          className="relative w-1/2 h-full bg-olive-envelope editorial-folio-door-right border-l border-cream/10 origin-right transform-gpu will-change-transform backface-hidden overflow-hidden"
+        >
+          {envelopeSrc ? (
+            <img
+              src={envelopeSrc}
+              alt=""
+              width={envelopeAsset.recommendedDimensions.width}
+              height={envelopeAsset.recommendedDimensions.height}
+              loading="eager"
+              decoding="sync"
+              fetchPriority="high"
+              onError={() => setEnvelopeTextureFailed(true)}
+              className="w-full h-full object-cover object-right opacity-92 scale-x-[-1]"
+            />
+          ) : (
+            <div className="w-full h-full editorial-envelope-grain" />
+          )}
+
+          {/* Sombra interior suave y relieve táctil junto a la unión vertical */}
+          <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-olive-envelope-dark/22 via-transparent to-olive-envelope-dark/28" />
+          <div className="pointer-events-none absolute inset-y-0 right-0 w-10 sm:w-20 bg-gradient-to-l from-olive-envelope-dark/24 to-transparent" />
+          <div className="pointer-events-none absolute inset-y-0 left-0 w-8 bg-gradient-to-r from-olive-envelope-dark/22 to-transparent" />
+
+          {/* Filete perimetral editorial continuo de papelería */}
+          <div className="pointer-events-none absolute top-4 bottom-4 right-4 left-0 sm:top-7 sm:bottom-7 sm:right-7 border-y border-r border-cream/15" />
+        </motion.div>
+
+        {/* Destinatario Editorial en Caligrafía Pinyon Script con Aire Generoso Arriba del Sello */}
         <motion.div
           animate={isOpening ? { opacity: 0, y: -10 } : { opacity: 1, y: 0 }}
-          transition={{ duration: 0.32, ease: EDITORIAL_EASE }}
-          className="pointer-events-none absolute inset-x-0 top-[11%] sm:top-[12%] z-20 px-6 flex flex-col items-center text-center"
+          transition={{ duration: 0.28, ease: EDITORIAL_EASE }}
+          className="pointer-events-none absolute inset-x-0 top-[14%] sm:top-[16%] z-20 px-6 flex flex-col items-center text-center"
         >
           <p className="text-[11px] uppercase tracking-[0.34em] text-cream/90 font-sans font-medium">
             Para
           </p>
-          <p className="mt-2 max-w-md font-display text-2xl sm:text-3xl md:text-[2.15rem] text-cream tracking-wide font-normal leading-snug drop-shadow-[0_1px_6px_rgba(24,30,12,0.3)]">
+          <p
+            data-testid="envelope-recipient-name"
+            className="mt-3 max-w-lg font-script text-4xl sm:text-5xl text-cream font-normal leading-[1.15] drop-shadow-[0_2px_10px_rgba(20,26,10,0.34)]"
+          >
             {guest.nombreInvitacion}
           </p>
         </motion.div>
 
-        {/* Sello de Cera Artesanal Realista (.webp transparente) exactamente sobre el Vértice de la Solapa (47%) */}
-        <div className="absolute left-1/2 top-[47%] -translate-x-1/2 -translate-y-1/2 z-30">
+        {/* Sello de Cera Deep Burgundy Centrado sobre la Unión de Ambas Hojas */}
+        <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-30">
           <motion.button
             type="button"
             onClick={handleSealClick}
@@ -290,10 +229,10 @@ export const WaxSealEntrance: React.FC = () => {
             whileTap={prefersReducedMotion ? undefined : { scale: 0.96 }}
             animate={
               isOpening && !prefersReducedMotion
-                ? { scale: 1.12, opacity: 0 }
+                ? { scale: [1, 1.04, 0.92], opacity: [1, 1, 0] }
                 : { scale: 1, opacity: 1 }
             }
-            transition={{ duration: 0.42, ease: EDITORIAL_EASE }}
+            transition={{ duration: 0.3, ease: EDITORIAL_EASE }}
             aria-label="Abrir invitación de boda de Montse y Gerardo"
             className="group relative w-28 h-28 sm:w-32 sm:h-32 flex items-center justify-center cursor-pointer transform-gpu will-change-transform rounded-full focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-cream disabled:cursor-default"
           >
@@ -307,7 +246,7 @@ export const WaxSealEntrance: React.FC = () => {
                 loading="eager"
                 decoding="sync"
                 onError={() => setWaxSealFailed(true)}
-                className="pointer-events-none w-full h-full object-contain drop-shadow-[0_12px_20px_rgba(20,10,12,0.48)] transition-transform duration-300"
+                className="pointer-events-none w-full h-full object-contain drop-shadow-[0_14px_22px_rgba(20,10,12,0.5)] transition-transform duration-300"
               />
             ) : (
               <span
@@ -318,18 +257,18 @@ export const WaxSealEntrance: React.FC = () => {
 
             {/* Monograma M & G estampado en Foil Oro Viejo sobre el centro del sello borgoña */}
             <span className="pointer-events-none absolute inset-0 flex items-center justify-center">
-              <span className="font-display font-medium text-base sm:text-lg tracking-[0.12em] whitespace-nowrap editorial-foil-gold">
+              <span className="font-display font-medium text-base sm:text-lg tracking-[0.12em] pl-[0.12em] whitespace-nowrap editorial-foil-gold">
                 M &amp; G
               </span>
             </span>
           </motion.button>
         </div>
 
-        {/* Indicación Discreta y Fecha Blindada por Tier en la Zona Inferior Despejada */}
+        {/* Indicación Discreta y Fecha Blindada por Tier en la Zona Inferior */}
         <motion.div
           animate={isOpening ? { opacity: 0, y: 8 } : { opacity: 1, y: 0 }}
-          transition={{ duration: 0.28, ease: EDITORIAL_EASE }}
-          className="pointer-events-none absolute inset-x-0 bottom-[11%] sm:bottom-[12%] z-20 px-6 flex flex-col items-center gap-3.5 text-center"
+          transition={{ duration: 0.26, ease: EDITORIAL_EASE }}
+          className="pointer-events-none absolute inset-x-0 bottom-[12%] sm:bottom-[14%] z-20 px-6 flex flex-col items-center gap-3.5 text-center"
         >
           <div className="inline-flex items-center gap-2.5">
             <span
@@ -344,7 +283,7 @@ export const WaxSealEntrance: React.FC = () => {
             {envelopeDateLabel}
           </p>
         </motion.div>
-      </motion.div>
+      </div>
     </motion.div>
   );
 };

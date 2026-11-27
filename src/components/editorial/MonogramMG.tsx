@@ -18,11 +18,16 @@ export const MonogramMG: React.FC<MonogramMGProps> = ({
   if (variant === 'burgundy-seal') {
     return (
       <span
-        className={`relative inline-flex items-center justify-center rounded-full bg-burgundy editorial-burgundy-seal select-none ${className}`}
+        className={`relative isolate overflow-hidden inline-flex items-center justify-center rounded-full bg-burgundy editorial-burgundy-seal select-none ${className}`}
         aria-hidden={decorative ? true : undefined}
         role={decorative ? undefined : 'img'}
         aria-label={decorative ? undefined : label}
       >
+        {/* Grano táctil real de papel algodón integrado sobre el fondo Deep Burgundy */}
+        <span
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 rounded-full editorial-burgundy-seal-grain"
+        />
         {/* Doble anillo interior fino en oro viejo suave */}
         <span
           aria-hidden="true"
