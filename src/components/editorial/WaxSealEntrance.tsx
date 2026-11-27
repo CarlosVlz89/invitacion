@@ -233,53 +233,46 @@ export const WaxSealEntrance: React.FC = () => {
                 : { scale: 1, opacity: 1 }
             }
             transition={{ duration: 0.3, ease: EDITORIAL_EASE }}
-            aria-label="Abrir invitación de boda de Montse y Gerardo"
+            aria-label="Abrir invitación de Montse y Gerardo"
             className="group relative w-28 h-28 sm:w-32 sm:h-32 flex items-center justify-center cursor-pointer transform-gpu will-change-transform rounded-full focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-cream disabled:cursor-default"
           >
-            {waxSealSrc ? (
-              <img
-                src={waxSealSrc}
-                alt=""
-                aria-hidden="true"
-                width={waxSealAsset.recommendedDimensions.width}
-                height={waxSealAsset.recommendedDimensions.height}
-                loading="eager"
-                decoding="sync"
-                onError={() => setWaxSealFailed(true)}
-                className="pointer-events-none w-full h-full object-contain drop-shadow-[0_14px_22px_rgba(20,10,12,0.5)] transition-transform duration-300"
-              />
-            ) : (
-              <span
-                aria-hidden="true"
-                className="pointer-events-none w-24 h-24 sm:w-28 sm:h-28 rounded-full editorial-wax-seal border border-cream/25"
-              />
-            )}
+            <span className="relative flex items-center justify-center w-full h-full rounded-full overflow-hidden editorial-seal-glint">
+              {waxSealSrc ? (
+                <img
+                  src={waxSealSrc}
+                  alt=""
+                  aria-hidden="true"
+                  width={waxSealAsset.recommendedDimensions.width}
+                  height={waxSealAsset.recommendedDimensions.height}
+                  loading="eager"
+                  decoding="sync"
+                  onError={() => setWaxSealFailed(true)}
+                  className="pointer-events-none w-full h-full object-contain transition-transform duration-300"
+                />
+              ) : (
+                <span
+                  aria-hidden="true"
+                  className="pointer-events-none w-24 h-24 sm:w-28 sm:h-28 rounded-full editorial-wax-seal border border-cream/25"
+                />
+              )}
 
-            {/* Monograma M & G estampado en Foil Oro Viejo sobre el centro del sello borgoña */}
-            <span className="pointer-events-none absolute inset-0 flex items-center justify-center">
-              <span className="font-display font-medium text-base sm:text-lg tracking-[0.12em] pl-[0.12em] whitespace-nowrap editorial-foil-gold">
-                M &amp; G
+              {/* Monograma M & G estampado en Foil Oro Viejo sobre el centro del sello borgoña */}
+              <span className="pointer-events-none absolute inset-0 flex items-center justify-center">
+                <span className="font-display font-medium text-base sm:text-lg tracking-[0.12em] pl-[0.12em] whitespace-nowrap editorial-foil-gold">
+                  M &amp; G
+                </span>
               </span>
             </span>
           </motion.button>
         </div>
 
-        {/* Indicación Discreta y Fecha Blindada por Tier en la Zona Inferior */}
+        {/* Fecha Blindada por Tier en la Zona Inferior Despejada (sin texto instructivo explícito) */}
         <motion.div
           animate={isOpening ? { opacity: 0, y: 8 } : { opacity: 1, y: 0 }}
           transition={{ duration: 0.26, ease: EDITORIAL_EASE }}
-          className="pointer-events-none absolute inset-x-0 bottom-[12%] sm:bottom-[14%] z-20 px-6 flex flex-col items-center gap-3.5 text-center"
+          className="pointer-events-none absolute inset-x-0 bottom-[13%] sm:bottom-[15%] z-20 px-6 flex flex-col items-center text-center"
         >
-          <div className="inline-flex items-center gap-2.5">
-            <span
-              aria-hidden="true"
-              className="inline-block w-1.5 h-1.5 rounded-full bg-cream/85 editorial-pulse-dot"
-            />
-            <span className="text-[11px] uppercase tracking-[0.28em] text-cream font-sans font-medium">
-              Toca el sello para abrir
-            </span>
-          </div>
-          <p className="text-[11px] uppercase tracking-[0.3em] text-cream/90 font-sans">
+          <p className="text-[11px] uppercase tracking-[0.32em] text-cream/90 font-sans">
             {envelopeDateLabel}
           </p>
         </motion.div>

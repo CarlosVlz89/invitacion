@@ -319,6 +319,87 @@
     mask-image: linear-gradient(to top, #000 72%, transparent 100%);
   }
 
+  /* Paspartú físico de papel algodón crema con ventana interior biselada hundida */
+  .editorial-passepartout {
+    background-color: var(--bg-primary);
+    background-image: url('./assets/images/cotton-paper-tile.webp');
+    background-repeat: repeat;
+    background-size: 280px 280px;
+    box-shadow:
+      0 18px 40px rgba(24, 5, 8, 0.45),
+      0 4px 12px rgba(24, 5, 8, 0.28),
+      inset 0 1px 0 rgba(255, 255, 255, 0.72),
+      inset 0 -1px 0 rgba(45, 35, 30, 0.14);
+  }
+
+  .editorial-passepartout-window {
+    box-shadow:
+      inset 0 2px 6px rgba(45, 35, 30, 0.35),
+      inset 0 0 0 1px rgba(203, 191, 169, 0.7);
+  }
+
+  /* Guiño de luz sutil y respiración mínima para el sello de cera C00 */
+  .editorial-seal-glint {
+    position: relative;
+  }
+
+  .editorial-seal-glint::after {
+    content: '';
+    display: none;
+    pointer-events: none;
+    position: absolute;
+    inset: 10%;
+    border-radius: 9999px;
+    background-image: linear-gradient(
+      120deg,
+      transparent 30%,
+      rgba(245, 231, 198, 0.28) 50%,
+      transparent 70%
+    );
+    -webkit-mask-image: radial-gradient(circle, #000 58%, transparent 74%);
+    mask-image: radial-gradient(circle, #000 58%, transparent 74%);
+    transform: translateX(-140%);
+    will-change: transform;
+  }
+
+  /* Barrido tenue de luz translúcida sobre el velo de papel vegetal */
+  .editorial-vellum-glint {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .editorial-vellum-glint::after {
+    content: '';
+    display: none;
+    pointer-events: none;
+    position: absolute;
+    inset: -12% -40%;
+    background-image: linear-gradient(
+      120deg,
+      transparent 30%,
+      rgba(250, 247, 241, 0.34) 50%,
+      transparent 70%
+    );
+    transform: translateX(-120%);
+    will-change: transform;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .editorial-seal-glint {
+      animation: editorial-seal-breathe 4.2s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+    }
+
+    .editorial-seal-glint::after {
+      display: block;
+      animation: editorial-seal-glint-sweep 4.2s ease-in-out infinite;
+    }
+
+    .editorial-vellum-glint::after {
+      display: block;
+      animation: editorial-vellum-glint-sweep 4.8s ease-in-out infinite;
+    }
+  }
+
   /* Placeholder editorial crema cálido para el medallón */
   .editorial-cameo-placeholder {
     background: radial-gradient(
@@ -414,6 +495,23 @@
       border-color: CanvasText;
     }
 
+    .editorial-passepartout {
+      background-image: none;
+      background-color: Canvas;
+      border: 2px solid CanvasText;
+      box-shadow: none;
+    }
+
+    .editorial-passepartout-window {
+      border: 1px solid CanvasText;
+      box-shadow: none;
+    }
+
+    .editorial-seal-glint::after,
+    .editorial-vellum-glint::after {
+      display: none;
+    }
+
     .editorial-botanical-fade-top,
     .editorial-botanical-fade-bottom {
       display: none;
@@ -451,5 +549,59 @@
     .editorial-eq-bar-3 {
       animation: bounce 1s infinite 200ms;
     }
+  }
+}
+
+@keyframes editorial-seal-breathe {
+  0%,
+  100% {
+    transform: scale(1);
+    filter: drop-shadow(0 12px 20px rgba(20, 10, 12, 0.44));
+  }
+  20% {
+    transform: scale(1.022);
+    filter: drop-shadow(0 16px 26px rgba(20, 10, 12, 0.56));
+  }
+  42% {
+    transform: scale(1);
+    filter: drop-shadow(0 12px 20px rgba(20, 10, 12, 0.44));
+  }
+}
+
+@keyframes editorial-seal-glint-sweep {
+  0% {
+    transform: translateX(-140%);
+    opacity: 0;
+  }
+  6% {
+    opacity: 1;
+  }
+  26% {
+    transform: translateX(140%);
+    opacity: 0.9;
+  }
+  32%,
+  100% {
+    transform: translateX(140%);
+    opacity: 0;
+  }
+}
+
+@keyframes editorial-vellum-glint-sweep {
+  0% {
+    transform: translateX(-120%);
+    opacity: 0;
+  }
+  8% {
+    opacity: 1;
+  }
+  30% {
+    transform: translateX(120%);
+    opacity: 0.85;
+  }
+  36%,
+  100% {
+    transform: translateX(120%);
+    opacity: 0;
   }
 }
