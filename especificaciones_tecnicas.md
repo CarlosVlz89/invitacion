@@ -402,3 +402,25 @@ Los novios administran la lista de invitados en Google Sheets sin interactuar co
 ├── especificaciones_tecnicas.md       # Documento formal de arquitectura y especificaciones
 └── package.json
 ```
+
+---
+
+## 10. Roadmap de Experiencia Concierge (Fase 3 y Fase 4)
+
+A continuación se documentan las 4 mejoras aprobadas de alto impacto editorial y experiencia de invitado para integrarse junto con el backend real (Cloud Firestore + Google Sheets) y el ciclo de vida completo del evento:
+
+1. **Dedicatoria Secreta por Invitado (`notaPersonal`) [Fase 3]:**
+   * **Origen de Datos:** Columna opcional `Nota Personal` en Google Sheets sincronizada como `notaPersonal?: string` en Cloud Firestore (propiedad exclusiva de los novios, solo lectura desde la Web y sanitizada contra XSS antes de renderizarse).
+   * **Comportamiento UI:** Si el documento resuelto por `?guest=ID` contiene `notaPersonal`, se renderiza una tarjeta editorial exclusiva en papel algodón dirigida personalmente a ese invitado o familia inmediatamente debajo de la portada `HeroSection`. Si el campo está vacío o se accede con enlace genérico, el bloque no se monta en el DOM (cero espacios residuales).
+
+2. **Experiencia Post-Confirmación Concierge [Fase 3]:**
+   * **Calendario Dinámico (`.ics`):** Al completar la confirmación RSVP (`estatusWeb === 'confirmado'`), habilitar la descarga de un archivo `.ics` generado dinámicamente en cliente respetando el aislamiento estricto de Tier: incluye los eventos de **Viernes 16 y Sábado 17 de Julio, 2027** con direcciones para invitados **Tier A**, y exclusivamente **Sábado 17 de Julio, 2027** para invitados **Tier B**.
+   * **Pase Digital Editorial:** Habilitar la descarga de un **Pase Digital** personalizado (imagen exportada con la estética táctil de papel algodón Warm Cream `#F2ECE1`, monograma `M & G`, nombre de la invitación, folio único y pases confirmados nominalmente).
+
+3. **"La Canción que No Puede Faltar" en RSVP (`cancionSugerida`) [Fase 3]:**
+   * **Formulario y Validación:** Campo de texto opcional (`cancionSugerida`) integrado en `RsvpSection` bajo esquema Zod con límite de longitud y sanitización anti-XSS.
+   * **Sincronización:** Persistido en Firestore como propiedad de la Web y reflejado vía webhook `doPost(e)` en una columna dedicada de Google Sheets para conformar la playlist colaborativa del DJ.
+
+4. **Segunda Vida — Álbum Colaborativo del Evento [Fase 4]:**
+   * **Activación del Día del Evento:** Modo o ruta activable el día de la boda (**17 de Julio, 2027**) accesible desde el mismo enlace de invitación o códigos QR colocados en las mesas de recepción.
+   * **Propósito:** Permitir que los invitados suban fotografías y videos espontáneos durante la celebración hacia un repositorio compartido privado de Montse & Gerardo, extendiendo la vida útil de la plataforma más allá del RSVP.
